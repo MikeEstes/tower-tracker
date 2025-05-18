@@ -6,7 +6,6 @@ import { CardData } from '../data/CardData';
 import { Colors } from '../types/colors';
 import CardModal from '../components/CardModal';
 
-// Placeholder screen for the Cards module
 export default function CardsScreen() {
   return (
     <>
@@ -40,9 +39,5 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: 6,
     justifyContent: 'flex-start',
-  },
-  text: {
-    fontSize: 18,
-    fontWeight: '500',
   },
 }); 

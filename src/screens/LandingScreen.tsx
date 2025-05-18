@@ -1,7 +1,6 @@
 import React from 'react';
-import { FlatList, Pressable, StyleSheet, Text, useWindowDimensions } from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
@@ -25,6 +24,7 @@ const modules: Module[] = [
   { key: 'UltimateWeapons', title: 'Ultimate Weapons' },
   { key: 'Cards', title: 'Cards' },
   { key: 'Labs', title: 'Labs' },
+  { key: 'Share', title: 'Share Progress' },
 ];
 
 export default function LandingScreen() {
@@ -35,7 +35,7 @@ export default function LandingScreen() {
   const cardSize = (width - 32 - (numColumns - 1) * 16) / numColumns;
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {/* Render a grid of module cards */}
       <FlatList
         data={modules}
@@ -65,6 +65,9 @@ export default function LandingScreen() {
                 case 'Labs':
                   navigation.navigate('Labs');
                   break;
+                case 'Share':
+                  navigation.navigate('Share');
+                  break;
               }
             }}
           >
@@ -72,7 +75,7 @@ export default function LandingScreen() {
           </Pressable>
         )}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 

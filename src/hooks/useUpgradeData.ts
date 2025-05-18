@@ -1,11 +1,12 @@
 import { useAtomValue } from 'jotai';
 
-import { playerUpgradeProgressAtom } from '../atoms/playerProgressAtom';
+import { playerUpgradeProgressAtom, previewModeAtom, previewUpgradeProgressAtom } from '../atoms/playerProgressAtom';
 import { UpgradeDataMap } from '../data';
 
 export const useUpgradeData = (id: string) => {
+  const isPreview = useAtomValue(previewModeAtom);
   const meta = UpgradeDataMap[id];
-  const progressMap = useAtomValue(playerUpgradeProgressAtom);
+  const progressMap = useAtomValue(isPreview ? previewUpgradeProgressAtom : playerUpgradeProgressAtom);
   const progress = progressMap[id as keyof typeof progressMap] ?? 0;
 
   return {

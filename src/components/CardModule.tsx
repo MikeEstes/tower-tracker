@@ -7,6 +7,7 @@ import { Colors } from '../types/colors';
 import { Card, Rarity } from '../types/cards';
 import { cardModalAtom, cardModalDataAtom } from '../atoms/modalsAtom';
 import { useCardData } from '../hooks/useCardData';
+import { usePreviewMode } from '../hooks/usePreviewMode';
 
 const { width } = Dimensions.get('window');
 
@@ -23,6 +24,7 @@ const CardModule = (item: Card) => {
   const starColor = starColorMap[cardLevel] ?? Colors.text;
   const borderColorMap: Record<Rarity, string> = { "Common": Colors.common, "Rare": Colors.rare, "Epic": Colors.epic };
   const borderColor = borderColorMap[rarity] ?? Colors.moduleBorder;
+  const isPreview = usePreviewMode();
 
   const handleContainerPress = () => {
     setCardModalData(id);
@@ -35,15 +37,15 @@ const CardModule = (item: Card) => {
         <Text style={styles.title}>{name}</Text>
       </View>
       <View style={[styles.body, { borderColor }]}>
-        <TouchableOpacity onPress={decrement} style={[styles.button, styles.negButton]}>
+        {!isPreview && <TouchableOpacity onPress={decrement} style={[styles.button, styles.negButton]}>
           <Text style={styles.buttonText}>{'-'}</Text>
-        </TouchableOpacity>
-        <View>
+        </TouchableOpacity>}
+        <View style={styles.bodyTextContainer}>
           <Text style={styles.bodyText}>{levelText}</Text>
         </View>
-        <TouchableOpacity onPress={increment} style={[styles.button, styles.posButton]}>
+        {!isPreview && <TouchableOpacity onPress={increment} style={[styles.button, styles.posButton]}>
           <Text style={styles.buttonText}>{'+'}</Text>
-        </TouchableOpacity>
+        </TouchableOpacity>}
       </View>
       <View style={styles.footer}>
         <Text style={[styles.footerText, { color: starColor }]}>{stars}</Text>
@@ -69,6 +71,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  bodyTextContainer: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
   },
   button: {
     alignItems: 'center',

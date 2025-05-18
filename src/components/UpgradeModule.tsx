@@ -8,6 +8,7 @@ import { Colors } from '../types/colors';
 import { usePlayerData } from '../hooks/usePlayerData';
 import { playerUpgradeProgressAtom } from '../atoms/playerProgressAtom';
 import { upgradeModalAtom, upgradeModalDataAtom } from '../atoms/modalsAtom';
+import { usePreviewMode } from '../hooks/usePreviewMode';
 
 const { width } = Dimensions.get('window');
 const UpgradeModule = (item: Upgrade) => {
@@ -16,6 +17,7 @@ const UpgradeModule = (item: Upgrade) => {
   const setIsVisible = useSetAtom(upgradeModalAtom);
   const setUpgradeModalData = useSetAtom(upgradeModalDataAtom);
   const { incrementStat, decrementStat } = usePlayerData();
+  const isPreview = usePreviewMode();
 
   const handleContainerPress = () => {
     setUpgradeModalData(id);
@@ -40,14 +42,14 @@ const UpgradeModule = (item: Upgrade) => {
         <View style={styles.displayContainer}>
           <Text style={styles.text}>{playerProgress[item.id as keyof typeof playerProgress]}</Text>
         </View>
-        <View style={styles.controls}>
+        {!isPreview && <View style={styles.controls}>
           <TouchableOpacity style={[styles.controlButton, styles.negButton]} onPress={handleNegButtonPress}>
             <Text style={styles.controlButtonText}>{'-'}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={[styles.controlButton, styles.posButton]} onPress={handlePosButtonPress}>
             <Text style={styles.controlButtonText}>{'+'}</Text>
           </TouchableOpacity>
-        </View>
+        </View>}
       </View>
     </View>
   );

@@ -11,6 +11,8 @@ import UpgradeScreen from './src/screens/UpgradeScreen';
 import UltimateWeaponsScreen from './src/screens/UltimateWeaponsScreen';
 import CardsScreen from './src/screens/CardsScreen';
 import LabsScreen from './src/screens/LabsScreen';
+import ShareScreen from './src/screens/ShareScreen';
+import StorageSync from './src/components/StorageSync';
 
 // Define the navigation param list for type safety
 export type RootStackParamList = {
@@ -21,6 +23,7 @@ export type RootStackParamList = {
   UltimateWeapons: undefined;
   Cards: undefined;
   Labs: undefined;
+  Share: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -28,6 +31,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function App() {
   return (
     <Provider>
+      <StorageSync />
       <SafeAreaProvider>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Landing">
@@ -38,6 +42,7 @@ export default function App() {
             <Stack.Screen name="UltimateWeapons" component={UltimateWeaponsScreen} options={{ title: 'Ultimate Weapons' }} />
             <Stack.Screen name="Cards" component={CardsScreen} options={{ title: 'Cards' }} />
             <Stack.Screen name="Labs" component={LabsScreen} options={{ title: 'Labs' }} />
+            <Stack.Screen name="Share" component={ShareScreen} options={{ title: 'Share Progress' }} />
           </Stack.Navigator>
         </NavigationContainer>
         <StatusBar style="auto" />

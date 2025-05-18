@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import { atom, useAtomValue, useSetAtom } from 'jotai';
 
-import { playerCardProgressAtom } from '../atoms/playerProgressAtom';
+import { playerCardProgressAtom, previewModeAtom, previewCardProgressAtom } from '../atoms/playerProgressAtom';
 import { CardDataMap, CardLevels, CardAmounts } from '../data/CardData';
 import { Card } from '../types/cards';
 
@@ -18,15 +18,17 @@ export interface UseCardDataReturn {
 }
 
 export const useCardData = (id: Card['id']): UseCardDataReturn => {
+  const previewMode = useAtomValue(previewModeAtom);
   const meta = CardDataMap[id];
 
-  // derive per-card progress atom for optimized subscription
+  // choose live or preview atom
+  const baseAtom = previewMode ? previewCardProgressAtom : playerCardProgressAtom;
   const progressAtom = useMemo(
-    () => atom((get) => ((get(playerCardProgressAtom) as any)[id] as number) ?? 0),
-    [id]
+    () => atom((get) => ((get(baseAtom) as any)[id] as number) ?? 0),
+    [id, previewMode]
   );
   const progress = useAtomValue(progressAtom);
-  const setPlayerProgress = useSetAtom(playerCardProgressAtom);
+  const setPlayerProgress = useSetAtom(baseAtom);
 
   // compute card level and display text
   const { cardLevel, levelText } = useMemo(() => {
