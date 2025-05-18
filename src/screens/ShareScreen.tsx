@@ -26,12 +26,13 @@ export default function ShareScreen() {
   const [importCode, setImportCode] = useState('');
   const [error, setError] = useState<string | null>(null);
 
-  const handleGenerate = () => {
+  const handleGenerate = async () => {
     try {
       const code = exportProgress(upgradeProgress, cardProgress);
       setExportCode(code);
       setError(null);
-      handleCopy();
+      await Clipboard.setStringAsync(code);
+      Alert.alert('Copied to clipboard');
     } catch (e) {
       Alert.alert('Error', (e as Error).message);
     }

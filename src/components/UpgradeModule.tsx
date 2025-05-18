@@ -1,19 +1,19 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions, Pressable, TouchableOpacity } from 'react-native';
 
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 
 import { Upgrade } from '../types/upgrades';
 import { Colors } from '../types/colors';
 import { usePlayerData } from '../hooks/usePlayerData';
-import { playerUpgradeProgressAtom } from '../atoms/playerProgressAtom';
+import { useUpgradeData } from '../hooks/useUpgradeData';
 import { upgradeModalAtom, upgradeModalDataAtom } from '../atoms/modalsAtom';
 import { usePreviewMode } from '../hooks/usePreviewMode';
 
 const { width } = Dimensions.get('window');
 const UpgradeModule = (item: Upgrade) => {
   const { id, name } = item;
-  const playerProgress = useAtomValue(playerUpgradeProgressAtom);
+  const { progress } = useUpgradeData(id);
   const setIsVisible = useSetAtom(upgradeModalAtom);
   const setUpgradeModalData = useSetAtom(upgradeModalDataAtom);
   const { incrementStat, decrementStat } = usePlayerData();
@@ -40,7 +40,7 @@ const UpgradeModule = (item: Upgrade) => {
       </Pressable>
       <View style={styles.controlsContainer}>
         <View style={styles.displayContainer}>
-          <Text style={styles.text}>{playerProgress[item.id as keyof typeof playerProgress]}</Text>
+          <Text style={styles.text}>{progress}</Text>
         </View>
         {!isPreview && <View style={styles.controls}>
           <TouchableOpacity style={[styles.controlButton, styles.negButton]} onPress={handleNegButtonPress}>
