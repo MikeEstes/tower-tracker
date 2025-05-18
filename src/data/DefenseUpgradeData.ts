@@ -97,4 +97,16 @@ export const DefenseUpgradeData: Upgrade[] = [
     maxLevel: 75,
     description: 'Chance of a killing hit to the tower being ignored',
   },
+  {
+    id: 'wallHealth',
+    name: 'Wall Health',
+    maxLevel: 1800,
+    description: 'Maximum health of the wall is a percentage of tower health <VERIFY>',
+  },
+  {
+    id: 'wallRebuild',
+    name: 'Wall Rebuild',
+    maxLevel: 300,
+    description: 'Time it takes to rebuild the wall after it is destroyed <VERIFY',
+  }
 ];

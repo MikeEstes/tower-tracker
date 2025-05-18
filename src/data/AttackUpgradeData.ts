@@ -91,4 +91,16 @@ export const AttackUpgradeData: Upgrade[] = [
     maxLevel: 120,
     description: 'Super critical hit damage multiplier',
   },
+  {
+    id: 'rendArmorChance',
+    name: 'Rend Armor Chance',
+    maxLevel: 299,
+    description: 'Chance on enemy hit to permanently increase the damage that enemy takes from projectiles <VERIFY>',
+  },
+  {
+    id: 'rendArmorMult',
+    name: 'Rend Armor Mult',
+    maxLevel: 299,
+    description: 'Amount of additional damage that the enemy takes <VERIFY>',
+  },
 ];

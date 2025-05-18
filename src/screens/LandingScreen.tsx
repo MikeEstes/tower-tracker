@@ -24,12 +24,14 @@ const modules: Module[] = [
   { key: 'UltimateWeapons', title: 'Ultimate Weapons' },
   { key: 'Cards', title: 'Cards' },
   { key: 'Labs', title: 'Labs' },
+  { key: 'Relics', title: 'Relics' },
+  { key: 'Modules', title: 'Modules' },
   { key: 'Share', title: 'Share Progress' },
 ];
 
 export default function LandingScreen() {
   const navigation = useNavigation<LandingScreenNavigationProp>();
-  const numColumns = 2;
+  const numColumns = 3;
   const { width } = useWindowDimensions();
   // Calculate card size based on screen width and spacing
   const cardSize = (width - 32 - (numColumns - 1) * 16) / numColumns;
@@ -64,6 +66,12 @@ export default function LandingScreen() {
                   break;
                 case 'Labs':
                   navigation.navigate('Labs');
+                  break;
+                case 'Relics':
+                  navigation.navigate('Relics');
+                  break;
+                case 'Modules':
+                  navigation.navigate('Modules');
                   break;
                 case 'Share':
                   navigation.navigate('Share');

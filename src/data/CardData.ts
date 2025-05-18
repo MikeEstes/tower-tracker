@@ -186,7 +186,7 @@ export const CardData: Card[] = [
   {
     id: 'waveAccelerator',
     name: 'Wave Accelerator',
-    description: 'Reduces the wave cooldown timer by %{value} <NEED TO CHECK>',
+    description: 'Reduces the wave cooldown timer by %{value} <VERIFY>',
     rarity: 'Epic',
     stats: ["10 sec", "12 sec", "14 sec", "16 sec", "18 sec", "20 sec", "22 sec"]
   },

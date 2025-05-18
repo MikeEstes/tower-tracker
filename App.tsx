@@ -12,7 +12,10 @@ import UltimateWeaponsScreen from './src/screens/UltimateWeaponsScreen';
 import CardsScreen from './src/screens/CardsScreen';
 import LabsScreen from './src/screens/LabsScreen';
 import ShareScreen from './src/screens/ShareScreen';
+import RelicsScreen from './src/screens/RelicsScreen';
+import ModulesScreen from './src/screens/ModulesScreen';
 import StorageSync from './src/components/StorageSync';
+import PreviewButton from './src/components/PreviewButton';
 
 // Define the navigation param list for type safety
 export type RootStackParamList = {
@@ -24,6 +27,8 @@ export type RootStackParamList = {
   Cards: undefined;
   Labs: undefined;
   Share: undefined;
+  Relics: undefined;
+  Modules: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -34,7 +39,7 @@ export default function App() {
       <StorageSync />
       <SafeAreaProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Landing">
+          <Stack.Navigator initialRouteName="Landing" >
             <Stack.Screen name="Landing" component={LandingScreen} options={{ title: 'Tower Tracker' }} />
             <Stack.Screen name="AttackUpgrade" component={UpgradeScreen} options={{ title: 'Attack Upgrade' }} />
             <Stack.Screen name="DefenseUpgrade" component={UpgradeScreen} options={{ title: 'Defense Upgrade' }} />
@@ -43,9 +48,12 @@ export default function App() {
             <Stack.Screen name="Cards" component={CardsScreen} options={{ title: 'Cards' }} />
             <Stack.Screen name="Labs" component={LabsScreen} options={{ title: 'Labs' }} />
             <Stack.Screen name="Share" component={ShareScreen} options={{ title: 'Share Progress' }} />
+            <Stack.Screen name="Relics" component={RelicsScreen} options={{ title: 'Relics' }} />
+            <Stack.Screen name="Modules" component={ModulesScreen} options={{ title: 'Modules' }} />
           </Stack.Navigator>
         </NavigationContainer>
-        <StatusBar style="auto" />
+        <PreviewButton />
+        <StatusBar hidden={true} />
       </SafeAreaProvider>
     </Provider>
   );
