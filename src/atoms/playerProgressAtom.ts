@@ -1,7 +1,39 @@
 import { atom } from 'jotai';
 
+export const playerCardProgressAtom = atom({
+  damage: 0,
+  attackSpeed: 0,
+  health: 0,
+  healthRegen: 0,
+  range: 0,
+  cash: 0,
+  coins: 0,
+  slowAura: 0,
+  criticalChance: 0,
+  enemyBalance: 0,
+  extraDefense: 0,
+  fortress: 0,
+  freeUpgrades: 0,
+  extraOrb: 0,
+  plasmaCannon: 0,
+  criticalCoin: 0,
+  waveSkip: 0,
+  introSprint: 0,
+  landMineStun: 0,
+  recoveryPackageChance: 0,
+  deathRay: 0,
+  energyNet: 0,
+  superTower: 0,
+  secondWind: 0,
+  demonMode: 0,
+  energyShield: 0,
+  waveAccelerator: 0,
+  berserker: 0,
+  nuke: 0,
+});
+
 // Global atom to track the player's total progress across all screens
-export const playerProgressAtom = atom({
+export const playerUpgradeProgressAtom = atom({
   damage: 0,
   attackSpeed: 0,
   criticalChance: 0,

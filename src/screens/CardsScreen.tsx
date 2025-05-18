@@ -1,23 +1,45 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 
-import { SafeAreaView } from 'react-native-safe-area-context';
+import CardModule from '../components/CardModule';
+import { CardData } from '../data/CardData';
+import { Colors } from '../types/colors';
+import CardModal from '../components/CardModal';
 
 // Placeholder screen for the Cards module
 export default function CardsScreen() {
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>Cards Module Placeholder</Text>
-    </SafeAreaView>
+    <>
+      <View style={styles.container}>
+        <FlatList
+          data={CardData}
+          renderItem={({ item }) => <CardModule {...item} />}
+          keyExtractor={(item) => item.id}
+          numColumns={2}
+          columnWrapperStyle={styles.row}
+          contentContainerStyle={styles.list}
+        />
+      </View>
+      <CardModal />
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
+    backgroundColor: Colors.background,
     flex: 1,
     justifyContent: 'center',
     padding: 16,
+  },
+  list: {
+    gap: 6,
+  },
+  row: {
+    flex: 1,
+    gap: 6,
+    justifyContent: 'flex-start',
   },
   text: {
     fontSize: 18,

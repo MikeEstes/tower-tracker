@@ -3,24 +3,25 @@ import { View, Text, StyleSheet } from 'react-native';
 
 import { useAtomValue, useSetAtom } from 'jotai';
 
-import { upgradeModalAtom, upgradeModalDataAtom } from '../atoms/modalsAtom';
+import { Card } from '../types/cards';
+import { cardModalAtom, cardModalDataAtom } from '../atoms/modalsAtom';
 import { Colors } from '../types/colors';
-import { useUpgradeData } from '../hooks/useUpgradeData';
 import BaseModal from './BaseModal';
+import { useCardData } from '../hooks/useCardData';
 
-const UpgradeModal = () => {
-  const upgradeId = useAtomValue(upgradeModalDataAtom);
-  const setUpgradeModalData = useSetAtom(upgradeModalDataAtom);
-  const { name, description, maxLevel, progress } = useUpgradeData(upgradeId ?? '');
+const CardModal = () => {
+  const cardId = useAtomValue(cardModalDataAtom) as Card['id'];
+  const setCardModalData = useSetAtom(cardModalDataAtom);
+  const { name, description } = useCardData(cardId);
 
   const handleClose = () => {
-    setUpgradeModalData(null);
+    setCardModalData(null);
   };
 
-  if (!upgradeId) return null;
+  if (!cardId) return null;
 
   return (
-    <BaseModal modalAtom={upgradeModalAtom} onClose={handleClose}>
+    <BaseModal modalAtom={cardModalAtom} onClose={handleClose}>
       <View style={styles.modalContainer}>
         <View style={styles.modalHeader}>
           <Text style={styles.title}>{name}</Text>
@@ -29,15 +30,14 @@ const UpgradeModal = () => {
           <Text style={styles.description}>{description}</Text>
         </View>
         <View style={styles.modalFooter}>
-          <Text style={styles.description}>Current Progress: {progress}</Text>
-          <Text style={styles.description}>Max Level: {maxLevel}</Text>
+          {/** */}
         </View>
       </View>
     </BaseModal>
   );
 };
 
-export default UpgradeModal;
+export default CardModal;
 
 const styles = StyleSheet.create({
   description: {

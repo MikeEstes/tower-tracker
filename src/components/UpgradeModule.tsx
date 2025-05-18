@@ -6,13 +6,13 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { Upgrade } from '../types/upgrades';
 import { Colors } from '../types/colors';
 import { usePlayerData } from '../hooks/usePlayerData';
-import { playerProgressAtom } from '../atoms/playerProgressAtom';
+import { playerUpgradeProgressAtom } from '../atoms/playerProgressAtom';
 import { upgradeModalAtom, upgradeModalDataAtom } from '../atoms/modalsAtom';
 
 const { width } = Dimensions.get('window');
 const UpgradeModule = (item: Upgrade) => {
   const { id, name } = item;
-  const playerProgress = useAtomValue(playerProgressAtom);
+  const playerProgress = useAtomValue(playerUpgradeProgressAtom);
   const setIsVisible = useSetAtom(upgradeModalAtom);
   const setUpgradeModalData = useSetAtom(upgradeModalDataAtom);
   const { incrementStat, decrementStat } = usePlayerData();

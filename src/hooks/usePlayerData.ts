@@ -1,9 +1,9 @@
 import { useAtom } from 'jotai';
 
-import { playerProgressAtom } from '../atoms/playerProgressAtom';
+import { playerUpgradeProgressAtom } from '../atoms/playerProgressAtom';
 
 export const usePlayerData = () => {
-  const [playerProgress, setPlayerProgress] = useAtom(playerProgressAtom);
+  const [playerProgress, setPlayerProgress] = useAtom(playerUpgradeProgressAtom);
 
   const incrementStat = (stat: string) => {
     const upgradeStat = playerProgress[stat as keyof typeof playerProgress];
