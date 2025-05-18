@@ -5,7 +5,6 @@ import { useSetAtom } from 'jotai';
 
 import { Upgrade } from '../types/upgrades';
 import { Colors } from '../types/colors';
-import { usePlayerData } from '../hooks/usePlayerData';
 import { useUpgradeData } from '../hooks/useUpgradeData';
 import { upgradeModalAtom, upgradeModalDataAtom } from '../atoms/modalsAtom';
 import { usePreviewMode } from '../hooks/usePreviewMode';
@@ -13,10 +12,11 @@ import { usePreviewMode } from '../hooks/usePreviewMode';
 const { width } = Dimensions.get('window');
 const UpgradeModule = (item: Upgrade) => {
   const { id, name } = item;
-  const { progress } = useUpgradeData(id);
+  const { progress, increment, decrement, isMaxed } = useUpgradeData(id);
+  const disableSub = progress === 0;
+  const disableAdd = isMaxed;
   const setIsVisible = useSetAtom(upgradeModalAtom);
   const setUpgradeModalData = useSetAtom(upgradeModalDataAtom);
-  const { incrementStat, decrementStat } = usePlayerData();
   const isPreview = usePreviewMode();
 
   const handleContainerPress = () => {
@@ -25,16 +25,16 @@ const UpgradeModule = (item: Upgrade) => {
   };
 
   const handleNegButtonPress = () => {
-    decrementStat(item.id);
+    decrement();
   };
 
   const handlePosButtonPress = () => {
-    incrementStat(item.id);
+    increment();
   };
 
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, isMaxed && styles.containerMaxed]}>
       <Pressable style={styles.nameContainer} onPress={handleContainerPress}>
         <Text style={styles.text}>{name}</Text>
       </Pressable>
@@ -43,10 +43,10 @@ const UpgradeModule = (item: Upgrade) => {
           <Text style={styles.text}>{progress}</Text>
         </View>
         {!isPreview && <View style={styles.controls}>
-          <TouchableOpacity style={[styles.controlButton, styles.negButton]} onPress={handleNegButtonPress}>
+          <TouchableOpacity style={[styles.controlButton, styles.negButton, disableSub && styles.disabled]} onPress={handleNegButtonPress}>
             <Text style={styles.controlButtonText}>{'-'}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.controlButton, styles.posButton]} onPress={handlePosButtonPress}>
+          <TouchableOpacity style={[styles.controlButton, styles.posButton, disableAdd && styles.disabled]} onPress={handlePosButtonPress}>
             <Text style={styles.controlButtonText}>{'+'}</Text>
           </TouchableOpacity>
         </View>}
@@ -67,6 +67,10 @@ const styles = StyleSheet.create({
     padding: 4,
     width: width * 0.45,
   },
+  containerMaxed: {
+    backgroundColor: Colors.moduleBackgroundMaxed,
+    borderColor: Colors.moduleBorderMaxed,
+  },
   controlButton: {
     alignItems: 'center',
     flex: 1,
@@ -82,8 +86,11 @@ const styles = StyleSheet.create({
   },
   controlsContainer: {
     borderColor: Colors.moduleSubBorder,
-    borderWidth: 1,
+    borderWidth: 2,
     flex: 2,
+  },
+  disabled: {
+    opacity: 0.5,
   },
   displayContainer: {
     alignItems: 'center',
