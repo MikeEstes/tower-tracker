@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import type { RootStackParamList } from '../../App';
+import { Colors } from '../types/colors';
 
 // Define navigation prop type for this screen
 type LandingScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Landing'>;
@@ -78,16 +79,21 @@ export default function LandingScreen() {
 const styles = StyleSheet.create({
   card: {
     alignItems: 'center',
-    backgroundColor: '#f0f0f0',
+    backgroundColor: Colors.moduleBackground,
+    borderColor: Colors.moduleBorder,
     borderRadius: 8,
+    borderWidth: 2,
     justifyContent: 'center',
     margin: 8,
   },
   cardTitle: {
+    color: Colors.text,
     fontSize: 16,
     fontWeight: '600',
+    textAlign: 'center',
   },
   container: {
+    backgroundColor: Colors.background,
     flex: 1,
     padding: 16,
   },

@@ -1,22 +1,25 @@
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions, Pressable, TouchableOpacity } from 'react-native';
 
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 
 import { Upgrade } from '../types/upgrades';
 import { Colors } from '../types/colors';
 import { usePlayerData } from '../hooks/usePlayerData';
 import { playerProgressAtom } from '../atoms/playerProgressAtom';
+import { upgradeModalAtom, upgradeModalDataAtom } from '../atoms/modalsAtom';
 
 const { width } = Dimensions.get('window');
 const UpgradeModule = (item: Upgrade) => {
-  const { description, name } = item;
+  const { id, name } = item;
   const playerProgress = useAtomValue(playerProgressAtom);
+  const setIsVisible = useSetAtom(upgradeModalAtom);
+  const setUpgradeModalData = useSetAtom(upgradeModalDataAtom);
   const { incrementStat, decrementStat } = usePlayerData();
 
   const handleContainerPress = () => {
-    // TODO: Show modal with description
-    console.log(description);
+    setUpgradeModalData(id);
+    setIsVisible(true);
   };
 
   const handleNegButtonPress = () => {
