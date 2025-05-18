@@ -1,0 +1,19 @@
+eslint-configs/**
+
+# Generated License Files
+licenses.json
+
+# Jest mocks
+jest/__mocks__
+
+package.json
+package-lock.json
+**/package.json
+
+# Native Artifacts
+android/**/*.json
+android/**/*.js
+ios/**/*.json
+
+node_modules/**
+scripts/**

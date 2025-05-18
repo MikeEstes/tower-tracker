@@ -1,0 +1,231 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+# TODO: Add file globs patterns to apply these rules (e.g. ["src/**/*.ts", "src/**/*.tsx"])
+# globs:
+description: This project is a mobile app aimed at tracking and sharing your Tower progress.
+alwaysApply: true
+preload_files:
+  - '.cursor/docs/**/*.md'
+---
+
+### 1. Mindset & Approach
+
+    Proceed like a senior (10×) engineer.
+
+    Think thoroughly before coding.
+
+    Do not stop until the feature is fully implemented.
+
+    Focus on core functionality before optimization.
+
+    Always use simple, modular solutions.
+
+### 2. Fundamental Coding Principles
+
+    Write clean, simple, and readable code.
+
+    Keep files small and focused (<200 lines).
+
+    Favor concise code over verbosity.
+
+    The fewer lines of code, the better.
+
+    Implement features in the simplest possible way.
+
+    Test after every meaningful change.
+
+### 3. Reasoning & Problem Solving
+
+    Start with uncertainty. Acknowledge multiple hypotheses.
+
+    Write three short reasoning paragraphs before coding.
+
+    For each complex decision, present two detailed solution paragraphs (50/50).
+
+    Summarize the current state factually: what changed, which files, and what failed.
+
+    Be careful with red herrings in research or logs.
+
+### 4. Error Fixing Process
+
+    Do not jump to conclusions. Consider multiple causes first.
+
+    Explain the problem in plain English.
+
+    Make minimal changes. Alter as few lines as possible.
+
+    If errors persist, instruct the user to perform a web search (e.g., via Perplexity).
+
+### 5. Feature Development Process
+
+    Verify each new feature by describing how the user can test it.
+
+    Break large tasks into only the truly necessary steps.
+
+    When unsure, recommend a targeted web search.
+
+    Do not end until all requirements are met.
+
+### 6. Comments & Documentation
+
+    Always write well‑documented code.
+
+    Include lots of explanatory comments.
+
+    Document the reasoning behind each change in comments.
+
+    Never delete old comments unless they are clearly obsolete.
+
+### 7. Code Style & Structure
+
+    Use functional and declarative patterns; avoid classes.
+
+    Export main component first, then subcomponents, helpers, static content, and types.
+
+    Prefer iteration and modularization over duplication.
+
+    Use Prettier for consistent formatting.
+
+### 8. Naming Conventions
+
+    Components: named exports only.
+
+    Variables: descriptive names with auxiliary verbs (e.g., isLoading, hasError).
+
+### 9. TypeScript Usage
+
+    Use TypeScript in strict mode everywhere.
+
+    Prefer type over interface for object shapes.
+
+    Avoid enum; use lookup maps instead.
+
+### 10. Syntax & Formatting
+
+    Use the function keyword for pure functions.
+
+    Write concise, declarative JSX.
+
+### 11. UI & Styling
+
+    Use Expo's built‑in components for common patterns.
+
+    Implement responsive layouts with Flexbox and useWindowDimensions.
+
+    Style with styled-components or Tailwind CSS.
+
+    Support dark mode via useColorScheme.
+
+    Ensure high accessibility using native props and ARIA roles.
+
+    Leverage react-native-reanimated and react-native-gesture-handler for animations and gestures.
+
+### 12. Safe Area Management
+
+    Wrap top‑level views in SafeAreaView.
+
+    Use SafeAreaProvider globally.
+
+    Use SafeAreaScrollView for scrollable content.
+
+    Avoid hard‑coded safe‑area paddings.
+
+### 13. Performance Optimization
+
+    Minimize useState and useEffect; prefer context or reducers.
+
+    Use splash screens (AppLoading, SplashScreen) for startup.
+
+    Optimize images: prefer WebP, include dimensions, lazy‑load with expo-image.
+
+    Code‑split with React's Suspense and dynamic imports.
+
+    Memoize components (React.memo), hooks (useMemo, useCallback).
+
+    Profile with Expo and React Native tools.
+
+### 14. Navigation
+
+    Use react-navigation for stacks, tabs, and drawers.
+
+    Follow deep‑linking and universal‑link best practices.
+
+    Use dynamic routes with expo-router when appropriate.
+
+### 15. State Management
+
+    Handle URL params with expo-linking.
+
+### 16. Error Handling & Validation
+
+    Validate inputs at runtime with Zod.
+
+    Log errors with Sentry or expo-error-reporter.
+
+    Use early returns for error checks; avoid nested if chains.
+
+    Implement global error boundaries.
+
+### 17. Testing
+
+    Write Jest unit tests with React Native Testing Library.
+
+    Use Detox for end‑to‑end integration tests.
+
+    Consider snapshot tests for critical UI components.
+
+    Leverage Expo's testing tools for multiple environments.
+
+### 18. Security
+
+    Sanitize all user inputs.
+
+    Store sensitive data securely (react-native-encrypted-storage).
+
+    Always use HTTPS and proper authentication.
+
+    Follow Expo's security guide found here: https://docs.expo.dev/guides/security/
+
+### 19. Internationalization (i18n)
+
+    Use expo-localization or react-native-i18n.
+
+    Support multiple languages and RTL layouts.
+
+    Ensure text scales for accessibility.
+
+### 20. Research & Web Searches
+
+    Write properly formed search queries: state the goal and request code snippets.
+
+    Summarize search results succinctly, avoiding distractions.
+
+    Highlight only the truly necessary findings.
+
+### 21. Delivery & Communication
+
+    Answer in short, clear sentences.
+
+    Begin answers with a brief rationale.
+
+    Provide factual summaries before proceeding.
+
+    When presenting options, remain unbiased until evaluation is complete.
+
+### 22. Key Conventions & Tools
+
+    Rely on Expo's managed workflow.
+
+    Track Mobile Web Vitals (load time, jank, responsiveness).
+
+    Manage env vars with expo-constants.
+
+    Handle permissions via expo-permissions.
+
+    Use expo-updates for OTA releases.
+
+    Follow Expo's deployment guide.
