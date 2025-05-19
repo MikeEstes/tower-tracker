@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, Pressable, StyleSheet, Text, useWindowDimensions } from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -84,6 +84,14 @@ export default function LandingScreen() {
           </Pressable>
         )}
       />
+      {__DEV__ && (
+        <Pressable
+          style={styles.devButton}
+          onPress={() => navigation.navigate('Dev')}
+        >
+          <Text style={styles.devButtonText}>Dev</Text>
+        </Pressable>
+      )}
     </SafeAreaView>
   );
 }
@@ -108,6 +116,21 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.background,
     flex: 1,
     padding: 16,
+  },
+  devButton: {
+    backgroundColor: Colors.devBanner,
+    borderColor: Colors.moduleBorder,
+    borderRadius: 8,
+    borderWidth: 2,
+    bottom: 16,
+    padding: 12,
+    position: 'absolute',
+    right: 16,
+  },
+  devButtonText: {
+    color: Colors.text,
+    fontSize: 14,
+    fontWeight: '600',
   },
   listContainer: {
     alignItems: 'center',

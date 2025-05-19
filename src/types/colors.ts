@@ -19,4 +19,5 @@ export const Colors = {
   text: '#FFFFFF',
   ultimateBanner: '#60D64C',
   utilityBanner: '#DDB813',
+  devBanner: '#FF6B6B',
 };

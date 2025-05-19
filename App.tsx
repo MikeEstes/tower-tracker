@@ -14,6 +14,7 @@ import LabsScreen from './src/screens/LabsScreen';
 import ShareScreen from './src/screens/ShareScreen';
 import RelicsScreen from './src/screens/RelicsScreen';
 import ModulesScreen from './src/screens/ModulesScreen';
+import DevScreen from './src/screens/DevScreen';
 import StorageSync from './src/components/StorageSync';
 import PreviewButton from './src/components/PreviewButton';
 
@@ -29,6 +30,7 @@ export type RootStackParamList = {
   Share: undefined;
   Relics: undefined;
   Modules: undefined;
+  Dev: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -50,6 +52,7 @@ export default function App() {
             <Stack.Screen name="Share" component={ShareScreen} options={{ title: 'Share Progress' }} />
             <Stack.Screen name="Relics" component={RelicsScreen} options={{ title: 'Relics' }} />
             <Stack.Screen name="Modules" component={ModulesScreen} options={{ title: 'Modules' }} />
+            <Stack.Screen name="Dev" component={DevScreen} options={{ title: 'Dev Menu' }} />
           </Stack.Navigator>
         </NavigationContainer>
         <PreviewButton />

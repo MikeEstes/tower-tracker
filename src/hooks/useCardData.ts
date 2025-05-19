@@ -5,6 +5,7 @@ import { atom, useAtomValue, useSetAtom } from 'jotai';
 import { playerCardProgressAtom, previewModeAtom, previewCardProgressAtom } from '../atoms/playerProgressAtom';
 import { CardDataMap, CardLevels, CardAmounts } from '../data/CardData';
 import { Card } from '../types/cards';
+import { upgradeAmountAtom } from '../atoms/configurationAtom';
 
 export interface UseCardDataReturn {
   id: Card['id'];
@@ -20,6 +21,8 @@ export interface UseCardDataReturn {
 export const useCardData = (id: Card['id']): UseCardDataReturn => {
   const previewMode = useAtomValue(previewModeAtom);
   const meta = CardDataMap[id];
+  const upgradeAmount = useAtomValue(upgradeAmountAtom);
+  const amount = upgradeAmount === 'MAX' ? 81 : parseInt(upgradeAmount, 10);
 
   // choose live or preview atom
   const baseAtom = previewMode ? previewCardProgressAtom : playerCardProgressAtom;
@@ -68,15 +71,25 @@ export const useCardData = (id: Card['id']): UseCardDataReturn => {
       meta?.stats[cardLevel - 1] ?? '[LOCKED]'
     ) ?? '';
 
+
+  const updateProgress = (delta: number) => {
+
+    setPlayerProgress((prev) => {
+      const current = (prev as any)[id] as number;
+      const newValue = Math.min(81, Math.max(0, current + delta));
+      return { ...(prev as any), [id]: newValue };
+    });
+  };
+
   // bound increment/decrement actions
   const increment = () => {
     if (progress >= CardLevels[7]) return;
-    setPlayerProgress((prev) => ({ ...(prev as any), [id]: (prev as any)[id] + 1 }));
+    updateProgress(amount);
   };
 
   const decrement = () => {
     if (progress <= CardLevels[0]) return;
-    setPlayerProgress((prev) => ({ ...(prev as any), [id]: (prev as any)[id] - 1 }));
+    updateProgress(-amount);
   };
 
   return {

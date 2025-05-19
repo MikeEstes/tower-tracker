@@ -88,9 +88,17 @@ const DEFAULT_UPGRADE_PROGRESS = {
 
 // Player Data Atoms
 export const playerCardProgressAtom = atom(DEFAULT_CARD_PROGRESS);
+export const playerCardTotalAmountAtom = atom((get) => {
+  const progress = get(playerCardProgressAtom);
+  return Object.values(progress).reduce((sum, amount) => sum + amount, 0);
+});
 export const playerUpgradeProgressAtom = atom(DEFAULT_UPGRADE_PROGRESS);
 
 // Preview Mode Atoms
 export const previewModeAtom = atom(false);
 export const previewUpgradeProgressAtom = atom(DEFAULT_UPGRADE_PROGRESS);
-export const previewCardProgressAtom = atom(DEFAULT_CARD_PROGRESS); 
+export const previewCardProgressAtom = atom(DEFAULT_CARD_PROGRESS);
+export const previewCardTotalAmountAtom = atom((get) => {
+  const progress = get(previewCardProgressAtom);
+  return Object.values(progress).reduce((sum, amount) => sum + amount, 0);
+});

@@ -20,6 +20,10 @@ const ModuleHeader = ({ title, bannerColor, showAmountSelector = false }: Module
     navigation.goBack();
   };
 
+  const handleInfoPress = () => {
+    console.log('Info pressed');
+  };
+
   return (
     <View style={[styles.container, { backgroundColor: bannerColor }]}>
       <View style={styles.headerContainer}>
@@ -27,6 +31,9 @@ const ModuleHeader = ({ title, bannerColor, showAmountSelector = false }: Module
           <Ionicons name='arrow-back' size={24} color={Colors.text} />
         </TouchableOpacity>
         <Text style={styles.headerText}>{title.toUpperCase()}</Text>
+        <TouchableOpacity onPress={handleInfoPress} style={styles.infoButton}>
+          <Ionicons name='information-circle' size={24} color={Colors.text} />
+        </TouchableOpacity>
       </View>
       {showAmountSelector && <UpgradeAmountSelector />}
     </View>
@@ -53,10 +60,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     gap: 8,
+    justifyContent: 'space-between',
   },
   headerText: {
     color: Colors.text,
     fontSize: 24,
     fontWeight: 'bold',
+  },
+  infoButton: {
+    backgroundColor: Colors.moduleBackground,
+    borderColor: Colors.moduleBorder,
+    borderRadius: 10,
+    borderWidth: 2,
+    padding: 4,
   },
 });

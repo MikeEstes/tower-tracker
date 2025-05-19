@@ -198,6 +198,13 @@ export const CardData: Card[] = [
     stats: ["0.8%", "0.9%", "1.0%", "1.1%", "1.2%", "1.3%", "1.4%"]
   },
   {
+    id: 'ultimateCrit',
+    name: 'Ultimate Crit',
+    description: 'Ultimate Weapons gain a %{value} chance to deal critical damage <VERIFY>',
+    rarity: 'Epic',
+    stats: ["1%", "1.33%", "1.66%", "2%", "2.33%", "2.66%", "3%"]
+  },
+  {
     id: 'nuke',
     name: 'Nuke',
     description: 'Destroy %{value} enemies',
