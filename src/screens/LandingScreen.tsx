@@ -1,8 +1,9 @@
 import React from 'react';
-import { FlatList, Pressable, StyleSheet, Text, useWindowDimensions, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, useWindowDimensions } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import type { RootStackParamList } from '../../App';
 import { Colors } from '../types/colors';
@@ -37,7 +38,7 @@ export default function LandingScreen() {
   const cardSize = (width - 32 - (numColumns - 1) * 16) / numColumns;
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       {/* Render a grid of module cards */}
       <FlatList
         data={modules}
@@ -83,7 +84,7 @@ export default function LandingScreen() {
           </Pressable>
         )}
       />
-    </View>
+    </SafeAreaView>
   );
 }
 

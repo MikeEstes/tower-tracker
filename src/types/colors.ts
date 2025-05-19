@@ -1,14 +1,15 @@
 export const Colors = {
   attackBanner: '#1A9FC9',
-  defenseBanner: '#D64864',
-  utilityBanner: '#DDB813',
   background: '#1C1735',
   buttonBackground: '#00000060',
   buttonBackgroundSelected: '#00FFFF90',
+  cardsBanner: '#1A9FC9',
   common: '#FFFFFF',
+  defenseBanner: '#D64864',
   gold: '#FFD700',
   rare: '#00FFFF',
   epic: '#FA25E6',
+  labsBanner: '#000000',
   modalBackground: '#00000090',
   moduleBackground: '#202052',
   moduleBackgroundMaxed: '#E8B21150',
@@ -17,4 +18,5 @@ export const Colors = {
   moduleSubBorder: '#FFFFFF50',
   text: '#FFFFFF',
   ultimateBanner: '#60D64C',
+  utilityBanner: '#DDB813',
 };

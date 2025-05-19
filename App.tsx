@@ -39,7 +39,7 @@ export default function App() {
       <StorageSync />
       <SafeAreaProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Landing" >
+          <Stack.Navigator initialRouteName="Landing" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Landing" component={LandingScreen} options={{ title: 'Tower Tracker' }} />
             <Stack.Screen name="AttackUpgrade" component={UpgradeScreen} options={{ title: 'Attack Upgrade' }} />
             <Stack.Screen name="DefenseUpgrade" component={UpgradeScreen} options={{ title: 'Defense Upgrade' }} />

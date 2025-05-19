@@ -1,13 +1,16 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
+
+import ModuleHeader from '../components/ModuleHeader';
+import { Colors } from '../types/colors';
 
 // Placeholder screen for the Labs module
 export default function LabsScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.text}>Labs Module Placeholder</Text>
+      <ModuleHeader bannerColor={Colors.labsBanner} title='Labs' />
     </SafeAreaView>
   );
 }
@@ -18,9 +21,5 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 16,
-  },
-  text: {
-    fontSize: 18,
-    fontWeight: '500',
   },
 }); 

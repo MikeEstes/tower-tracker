@@ -5,24 +5,29 @@ import CardModule from '../components/CardModule';
 import { CardData } from '../data/CardData';
 import { Colors } from '../types/colors';
 import CardModal from '../components/CardModal';
+import withBaseScreen from '../components/withBaseScreen';
 
-export default function CardsScreen() {
+const CardsScreen = () => {
   return (
-    <>
-      <View style={styles.container}>
-        <FlatList
-          data={CardData}
-          renderItem={({ item }) => <CardModule {...item} />}
-          keyExtractor={(item) => item.id}
-          numColumns={2}
-          columnWrapperStyle={styles.row}
-          contentContainerStyle={styles.list}
-        />
-      </View>
+    <View style={styles.container}>
+      <FlatList
+        data={CardData}
+        renderItem={({ item }) => <CardModule {...item} />}
+        keyExtractor={(item) => item.id}
+        numColumns={2}
+        columnWrapperStyle={styles.row}
+        contentContainerStyle={styles.list}
+      />
       <CardModal />
-    </>
+    </View>
   );
-}
+};
+
+export default withBaseScreen(CardsScreen, {
+  getTitle: () => 'Cards',
+  getBannerColor: () => Colors.cardsBanner,
+  showAmountSelector: false,
+});
 
 const styles = StyleSheet.create({
   container: {
