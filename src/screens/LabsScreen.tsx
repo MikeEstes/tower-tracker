@@ -1,17 +1,21 @@
 import React, { useMemo, useState } from 'react';
 import { StyleSheet, SectionList, View, Text, TouchableOpacity } from 'react-native';
 
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 import { Colors } from '../types/colors';
 import withBaseScreen from '../components/withBaseScreen';
-import { LabsData } from '../data/LabsData';
+import { LabData } from '../data/LabData';
+import LabModule from '../components/LabModule';
+import LabModal from '../components/LabModal';
 
 const LabsScreen = () => {
   // Add state to track expanded sections
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
 
   const sections = useMemo(() => {
-    const grouped: Record<string, typeof LabsData[number][]> = {};
-    LabsData.forEach(item => {
+    const grouped: Record<string, typeof LabData[number][]> = {};
+    LabData.forEach(item => {
       const key = item.section;
       if (!grouped[key]) grouped[key] = [];
       grouped[key].push(item);
@@ -38,18 +42,20 @@ const LabsScreen = () => {
     <View style={styles.container}>
       <SectionList
         sections={sections}
-        keyExtractor={(row, index) => row.map(i => i.id).join('-')}
-        renderSectionHeader={({ section: { title } }) => (
-          <TouchableOpacity
-            onPress={() => toggleSection(title)}
-            style={styles.headerContainer}
-          >
-            <Text style={styles.header}>{title}</Text>
-            <Text style={styles.expandIcon}>
-              {expandedSections[title] ? '▼' : '▶'}
-            </Text>
-          </TouchableOpacity>
-        )}
+        style={styles.listContainer}
+        keyExtractor={(row) => row.map(i => i.id).join('-')}
+        renderSectionHeader={({ section: { title } }) => {
+          const icon = expandedSections[title] ? 'chevron-down' : 'chevron-up';
+          return (
+            <TouchableOpacity
+              onPress={() => toggleSection(title)}
+              style={styles.headerContainer}
+            >
+              <Text style={styles.header}>{title}</Text>
+              <Ionicons name={icon} size={24} color={Colors.text} />
+            </TouchableOpacity>
+          )
+        }}
         renderItem={({ item: row, section: { title } }) => {
           // Only render items if section is expanded
           if (!expandedSections[title]) return null;
@@ -57,15 +63,14 @@ const LabsScreen = () => {
           return (
             <View style={styles.row}>
               {row.map(lab => (
-                <View key={lab.id} style={styles.itemContainer}>
-                  <Text style={styles.itemText}>{lab.name}</Text>
-                </View>
+                <LabModule key={lab.id} {...lab} />
               ))}
               {row.length === 1 && <View style={[styles.itemContainer, styles.placeholder]} />}
             </View>
           );
         }}
       />
+      <LabModal />
     </View>
   );
 };
@@ -73,17 +78,13 @@ const LabsScreen = () => {
 export default withBaseScreen(LabsScreen, {
   getTitle: () => 'Labs',
   getBannerColor: () => Colors.labsBanner,
-  showAmountSelector: false,
+  showAmountSelector: true,
 });
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-  },
-  expandIcon: {
-    color: Colors.text,
-    fontSize: 16,
   },
   header: {
     color: Colors.text,
@@ -101,22 +102,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9f9f9',
     borderRadius: 8,
     flex: 1,
-    marginHorizontal: 8,
     padding: 12,
   },
-  itemText: {
-    fontSize: 16,
-    textAlign: 'center',
+  listContainer: {
+    flex: 1,
   },
   placeholder: {
     backgroundColor: 'transparent',
     flex: 1,
-    marginHorizontal: 8,
-    padding: 12,
   },
   row: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 16,
+    flex: 1,
+    gap: 6,
+    justifyContent: 'flex-start',
+    marginBottom: 6,
   },
 }); 

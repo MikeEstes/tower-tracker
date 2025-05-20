@@ -10,28 +10,19 @@ import { upgradeModalAtom, upgradeModalDataAtom } from '../atoms/modalsAtom';
 import { usePreviewMode } from '../hooks/usePreviewMode';
 
 const { width } = Dimensions.get('window');
+
 const UpgradeModule = (item: Upgrade) => {
   const { id, name } = item;
   const { progress, increment, decrement, isMaxed } = useUpgradeData(id);
-  const disableSub = progress === 0;
-  const disableAdd = isMaxed;
+  const isPreview = usePreviewMode();
+
   const setIsVisible = useSetAtom(upgradeModalAtom);
   const setUpgradeModalData = useSetAtom(upgradeModalDataAtom);
-  const isPreview = usePreviewMode();
 
   const handleContainerPress = () => {
     setUpgradeModalData(id);
     setIsVisible(true);
   };
-
-  const handleNegButtonPress = () => {
-    decrement();
-  };
-
-  const handlePosButtonPress = () => {
-    increment();
-  };
-
 
   return (
     <View style={[styles.container, isMaxed && styles.containerMaxed]}>
@@ -43,10 +34,10 @@ const UpgradeModule = (item: Upgrade) => {
           <Text style={styles.text}>{progress}</Text>
         </View>
         {!isPreview && <View style={styles.controls}>
-          <TouchableOpacity style={[styles.controlButton, styles.negButton, disableSub && styles.disabled]} onPress={handleNegButtonPress}>
+          <TouchableOpacity style={[styles.controlButton, styles.negButton, progress === 0 && styles.disabled]} onPress={decrement}>
             <Text style={styles.controlButtonText}>{'-'}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.controlButton, styles.posButton, disableAdd && styles.disabled]} onPress={handlePosButtonPress}>
+          <TouchableOpacity style={[styles.controlButton, styles.posButton, isMaxed && styles.disabled]} onPress={increment}>
             <Text style={styles.controlButtonText}>{'+'}</Text>
           </TouchableOpacity>
         </View>}

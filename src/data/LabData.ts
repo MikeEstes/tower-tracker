@@ -1,4 +1,6 @@
-export const LabsData = [
+import { Lab } from "../types/labs";
+
+export const LabData: Lab[] = [
   // Main Research
   {
     id: 'gameSpeed',
@@ -109,7 +111,7 @@ export const LabsData = [
   {
     id: 'damage',
     name: 'Damage',
-    decription: 'Damage each projectile deals to enemies',
+    description: 'Damage each projectile deals to enemies',
     maxLevel: 100,
     section: 'Attack Research',
   },

@@ -13,9 +13,11 @@ const { width } = Dimensions.get('window');
 
 const CardModule = (item: Card) => {
   const { id, name, rarity } = item;
+  const { increment, decrement, levelText, cardLevel } = useCardData(id);
+  const isPreview = usePreviewMode();
+
   const setCardModalData = useSetAtom(cardModalDataAtom);
   const setIsVisible = useSetAtom(cardModalAtom);
-  const { increment, decrement, levelText, cardLevel } = useCardData(id);
 
   // derive stars display and color mapping
   const starsMap = ["LOCKED", "★", "★★", "★★★", "★★★★", "★★★★★"];
@@ -24,7 +26,6 @@ const CardModule = (item: Card) => {
   const starColor = starColorMap[cardLevel] ?? Colors.text;
   const borderColorMap: Record<Rarity, string> = { "Common": Colors.common, "Rare": Colors.rare, "Epic": Colors.epic };
   const borderColor = borderColorMap[rarity] ?? Colors.moduleBorder;
-  const isPreview = usePreviewMode();
 
   const handleContainerPress = () => {
     setCardModalData(id);

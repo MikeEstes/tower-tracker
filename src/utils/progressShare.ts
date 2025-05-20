@@ -6,6 +6,7 @@ export interface FullProgressPayload {
   data: {
     upgradeProgress: Record<string, number>;
     cardProgress: Record<string, number>;
+    labProgress: Record<string, number>;
   };
 }
 
@@ -14,13 +15,15 @@ const VERSION = 1;
 // Export both upgrade and card progress to a compressed Base64 string
 export function exportProgress(
   upgradeProgress: Record<string, number>,
-  cardProgress: Record<string, number>
+  cardProgress: Record<string, number>,
+  labProgress: Record<string, number>
 ): string {
   const payload: FullProgressPayload = {
     version: VERSION,
     data: {
       upgradeProgress,
       cardProgress,
+      labProgress,
     },
   };
   const json = JSON.stringify(payload);
@@ -33,6 +36,7 @@ export function importProgress(
 ): {
   upgradeProgress: Record<string, number>;
   cardProgress: Record<string, number>;
+  labProgress: Record<string, number>;
 } {
   const json = decompressFromBase64(code);
   if (!json) {
