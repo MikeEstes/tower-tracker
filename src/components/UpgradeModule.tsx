@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions, Pressable, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 
 import { useSetAtom } from 'jotai';
 
@@ -7,40 +7,38 @@ import { Upgrade } from '../types/upgrades';
 import { Colors } from '../types/colors';
 import { useUpgradeData } from '../hooks/useUpgradeData';
 import { upgradeModalAtom, upgradeModalDataAtom } from '../atoms/modalsAtom';
+import { selectedUpgradeAtom } from '../atoms/utilitiesAtom';
 import { usePreviewMode } from '../hooks/usePreviewMode';
-
-const { width } = Dimensions.get('window');
 
 const UpgradeModule = (item: Upgrade) => {
   const { id, name } = item;
-  const { progress, increment, decrement, isMaxed } = useUpgradeData(id);
+  const { progress, isMaxed, isSelected } = useUpgradeData(id);
+  const setSelectedUpgrade = useSetAtom(selectedUpgradeAtom);
   const isPreview = usePreviewMode();
 
   const setIsVisible = useSetAtom(upgradeModalAtom);
   const setUpgradeModalData = useSetAtom(upgradeModalDataAtom);
 
   const handleContainerPress = () => {
+    if (isPreview) return;
+
+    setSelectedUpgrade(id);
+  };
+
+  const handleContainerLongPress = () => {
     setUpgradeModalData(id);
     setIsVisible(true);
   };
 
   return (
-    <View style={[styles.container, isMaxed && styles.containerMaxed]}>
-      <Pressable style={styles.nameContainer} onPress={handleContainerPress}>
-        <Text style={styles.text}>{name}</Text>
+    <View style={[styles.container, isSelected && styles.containerSelected]}>
+      <Pressable style={styles.nameContainer} onPress={handleContainerPress} onLongPress={handleContainerLongPress}>
+        <Text style={[styles.text, isSelected && styles.textSelected]}>{name}</Text>
       </Pressable>
-      <View style={styles.controlsContainer}>
+      <View style={[styles.controlsContainer, isMaxed && styles.containerMaxed]}>
         <View style={styles.displayContainer}>
           <Text style={styles.text}>{progress}</Text>
         </View>
-        {!isPreview && <View style={styles.controls}>
-          <TouchableOpacity style={[styles.controlButton, styles.negButton, progress === 0 && styles.disabled]} onPress={decrement}>
-            <Text style={styles.controlButtonText}>{'-'}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={[styles.controlButton, styles.posButton, isMaxed && styles.disabled]} onPress={increment}>
-            <Text style={styles.controlButtonText}>{'+'}</Text>
-          </TouchableOpacity>
-        </View>}
       </View>
     </View>
   );
@@ -54,34 +52,22 @@ const styles = StyleSheet.create({
     borderColor: Colors.moduleBorder,
     borderWidth: 2,
     flexDirection: 'row',
+    flex: 1,
     height: 80,
     padding: 4,
-    width: width * 0.45,
   },
   containerMaxed: {
     backgroundColor: Colors.moduleBackgroundMaxed,
     borderColor: Colors.moduleBorderMaxed,
   },
-  controlButton: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
-  },
-  controlButtonText: {
-    color: Colors.text,
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  controls: {
-    flexDirection: 'row',
+  containerSelected: {
+    backgroundColor: Colors.moduleBackgroundSelected,
+    borderColor: Colors.moduleBorderSelected,
   },
   controlsContainer: {
     borderColor: Colors.moduleSubBorder,
     borderWidth: 2,
     flex: 2,
-  },
-  disabled: {
-    opacity: 0.5,
   },
   displayContainer: {
     alignItems: 'center',
@@ -92,15 +78,12 @@ const styles = StyleSheet.create({
     flex: 3,
     justifyContent: 'center',
   },
-  negButton: {
-    backgroundColor: 'red',
-  },
-  posButton: {
-    backgroundColor: 'green',
-  },
   text: {
     color: Colors.text,
     fontSize: 16,
     fontWeight: 'bold',
-  }
+  },
+  textSelected: {
+    color: Colors.textSelected,
+  },
 });

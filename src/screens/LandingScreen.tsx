@@ -15,6 +15,7 @@ type LandingScreenNavigationProp = NativeStackNavigationProp<RootStackParamList,
 type Module = {
   key: keyof RootStackParamList;
   title: string;
+  disabled?: boolean;
   params?: { type: 'Attack' | 'Defense' | 'Utility' };
 };
 
@@ -22,11 +23,11 @@ const modules: Module[] = [
   { key: 'AttackUpgrade', title: 'Attack Upgrades', params: { type: 'Attack' } },
   { key: 'DefenseUpgrade', title: 'Defense Upgrades', params: { type: 'Defense' } },
   { key: 'UtilityUpgrade', title: 'Utility Upgrades', params: { type: 'Utility' } },
-  { key: 'UltimateWeapons', title: 'Ultimate Weapons' },
+  { key: 'UltimateWeapons', title: 'Ultimate Weapons', disabled: true },
   { key: 'Cards', title: 'Cards' },
   { key: 'Labs', title: 'Labs' },
-  { key: 'Relics', title: 'Relics' },
-  { key: 'Modules', title: 'Modules' },
+  { key: 'Relics', title: 'Relics', disabled: true },
+  { key: 'Modules', title: 'Modules', disabled: true },
   { key: 'Share', title: 'Share Progress' },
 ];
 
@@ -48,6 +49,7 @@ export default function LandingScreen() {
         renderItem={({ item }) => (
           <Pressable
             style={[styles.card, { width: cardSize, height: cardSize }]}
+            disabled={item.disabled}
             onPress={() => {
               switch (item.key) {
                 case 'AttackUpgrade':
@@ -81,6 +83,7 @@ export default function LandingScreen() {
             }}
           >
             <Text style={styles.cardTitle}>{item.title}</Text>
+            {item.disabled && <Text style={styles.cardSubtitle}>{'(Coming Soon)'}</Text>}
           </Pressable>
         )}
       />
@@ -105,6 +108,12 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     justifyContent: 'center',
     margin: 8,
+  },
+  cardSubtitle: {
+    color: Colors.text,
+    fontSize: 12,
+    fontWeight: '400',
+    textAlign: 'center',
   },
   cardTitle: {
     color: Colors.text,

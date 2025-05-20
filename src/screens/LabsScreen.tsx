@@ -42,7 +42,6 @@ const LabsScreen = () => {
     <View style={styles.container}>
       <SectionList
         sections={sections}
-        style={styles.listContainer}
         keyExtractor={(row) => row.map(i => i.id).join('-')}
         renderSectionHeader={({ section: { title } }) => {
           const icon = expandedSections[title] ? 'chevron-down' : 'chevron-up';
@@ -78,13 +77,13 @@ const LabsScreen = () => {
 export default withBaseScreen(LabsScreen, {
   getTitle: () => 'Labs',
   getBannerColor: () => Colors.labsBanner,
-  showAmountSelector: true,
+  moduleType: 'lab'
 });
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: 8,
   },
   header: {
     color: Colors.text,
@@ -103,9 +102,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     flex: 1,
     padding: 12,
-  },
-  listContainer: {
-    flex: 1,
   },
   placeholder: {
     backgroundColor: 'transparent',

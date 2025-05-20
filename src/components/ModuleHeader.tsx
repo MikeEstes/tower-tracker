@@ -4,16 +4,14 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
-import UpgradeAmountSelector from './UpgradeAmountSelector';
 import { Colors } from '../types/colors';
 
 type ModuleHeaderProps = {
   title: string;
   bannerColor: string;
-  showAmountSelector?: boolean;
 }
 
-const ModuleHeader = ({ title, bannerColor, showAmountSelector = false }: ModuleHeaderProps) => {
+const ModuleHeader = ({ title, bannerColor }: ModuleHeaderProps) => {
   const navigation = useNavigation();
 
   const handleBackPress = () => {
@@ -35,7 +33,6 @@ const ModuleHeader = ({ title, bannerColor, showAmountSelector = false }: Module
           <Ionicons name='information-circle' size={24} color={Colors.text} />
         </TouchableOpacity>
       </View>
-      {showAmountSelector && <UpgradeAmountSelector />}
     </View>
   );
 };

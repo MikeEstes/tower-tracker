@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSetAtom } from 'jotai';
 
 import ModuleHeader from './ModuleHeader';
 import { Colors } from '../types/colors';
+import ModuleFooter from './ModuleFooter';
+import { currentModuleTypeAtom, ModuleType } from '../atoms/configurationAtom';
 
 type BaseScreenOptions<P> = {
   getTitle: (props: P) => string;
   getBannerColor: (props: P) => string;
-  showAmountSelector?: boolean;
+  moduleType: ModuleType;
 };
 
 function withBaseScreen<P extends object>(
@@ -19,7 +22,11 @@ function withBaseScreen<P extends object>(
   const ComponentWithBaseScreen: React.FC<P> = (props) => {
     const title = options.getTitle(props);
     const bannerColor = options.getBannerColor(props);
-    const showAmountSelector = options.showAmountSelector ?? false;
+    const setModuleType = useSetAtom(currentModuleTypeAtom);
+
+    useEffect(() => {
+      setModuleType(options.moduleType);
+    }, [options.moduleType, setModuleType]);
 
     return (
       <>
@@ -28,13 +35,13 @@ function withBaseScreen<P extends object>(
           <ModuleHeader
             title={title}
             bannerColor={bannerColor}
-            showAmountSelector={showAmountSelector}
           />
         </SafeAreaView>
 
         {/* Bottom safe area: content fills rest of screen */}
         <SafeAreaView edges={['bottom']} style={styles.container}>
           <WrappedComponent {...props} />
+          <ModuleFooter />
         </SafeAreaView>
       </>
     );

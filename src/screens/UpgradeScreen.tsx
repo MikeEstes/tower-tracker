@@ -51,14 +51,13 @@ const UpgradeScreen = ({ route }: UpgradeScreenProps) => {
 export default withBaseScreen<UpgradeScreenProps>(UpgradeScreen, {
   getTitle: ({ route }) => `${route.params.type} UPGRADES`,
   getBannerColor: ({ route }) => bannerColorMap[route.params.type],
-  showAmountSelector: true,
+  moduleType: 'upgrade'
 });
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.background,
     flex: 1,
-    padding: 16,
+    padding: 8,
   },
   list: {
     gap: 6,

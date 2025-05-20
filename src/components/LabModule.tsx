@@ -8,22 +8,28 @@ import { useLabData } from '../hooks/useLabData';
 import { usePreviewMode } from '../hooks/usePreviewMode';
 import { labModalAtom, labModalDataAtom } from '../atoms/modalsAtom';
 import { Lab } from '../types/labs';
+import { selectedLabAtom } from '../atoms/utilitiesAtom';
 
 const LabModule = (item: Lab) => {
   const { id, name } = item;
   const { progress, maxLevel, increment, decrement, isMaxed } = useLabData(id);
+  const setSelectedLab = useSetAtom(selectedLabAtom);
   const isPreview = usePreviewMode();
 
   const setIsVisible = useSetAtom(labModalAtom);
   const setLabModalData = useSetAtom(labModalDataAtom);
 
   const handleContainerPress = () => {
+    setSelectedLab(id);
+  };
+
+  const handleContainerLongPress = () => {
     setLabModalData(id);
     setIsVisible(true);
   };
 
   return (
-    <Pressable style={[styles.container, isMaxed && styles.containerMaxed]} onPress={handleContainerPress}>
+    <Pressable style={[styles.container, isMaxed && styles.containerMaxed]} onPress={handleContainerPress} onLongPress={handleContainerLongPress}>
       <Text style={styles.text}>{`${name} lv. ${isMaxed ? "Max" : progress}`}</Text>
       <View style={styles.progressContainer}>
         {!isPreview && <TouchableOpacity

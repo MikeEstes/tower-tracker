@@ -23,11 +23,12 @@ const CardsScreen = () => {
     <View style={styles.container}>
       <FlatList
         data={CardData}
-        renderItem={({ item }) => <CardModule {...item} />}
+        renderItem={({ item }) => (
+          <CardModule {...item} />
+        )}
         keyExtractor={(item) => item.id}
-        numColumns={2}
+        numColumns={4}
         columnWrapperStyle={styles.row}
-        contentContainerStyle={styles.list}
       />
       <CardModal />
     </View>
@@ -37,23 +38,18 @@ const CardsScreen = () => {
 export default withBaseScreen(CardsScreen, {
   getTitle: () => 'Cards',
   getBannerColor: () => Colors.cardsBanner,
-  showAmountSelector: true,
+  moduleType: 'card'
 });
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    backgroundColor: Colors.background,
     flex: 1,
-    justifyContent: 'center',
-    padding: 16,
-  },
-  list: {
-    gap: 6,
+    padding: 8,
   },
   row: {
     flex: 1,
     gap: 6,
     justifyContent: 'flex-start',
+    marginBottom: 6,
   },
 }); 
