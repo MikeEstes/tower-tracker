@@ -8,6 +8,7 @@ import { Colors } from '../types/colors';
 import { useUpgradeData } from '../hooks/useUpgradeData';
 import BaseModal from './BaseModal';
 import ModalContent from './ModalContent';
+import { Typography } from '../styles/fonts';
 
 const UpgradeModal = () => {
   const upgradeId = useAtomValue(upgradeModalDataAtom);
@@ -22,7 +23,7 @@ const UpgradeModal = () => {
 
   const footerContent = (
     <>
-      <Text style={{ color: Colors.text, fontSize: 16, textAlign: 'center' }}>
+      <Text style={Typography.display}>
         Current Progress: {progress}
       </Text>
       <Text style={{ color: Colors.text, fontSize: 16, textAlign: 'center' }}>

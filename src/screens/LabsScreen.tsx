@@ -1,18 +1,43 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { StyleSheet, SectionList, View, Text, TouchableOpacity } from 'react-native';
 
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useSetAtom, useAtomValue } from 'jotai';
 
 import { Colors } from '../types/colors';
 import withBaseScreen from '../components/withBaseScreen';
-import { LabData } from '../data/LabData';
+import { LabData, MAX_LAB_AMOUNT } from '../data/LabData';
 import LabModule from '../components/LabModule';
 import LabModal from '../components/LabModal';
 import { Spacing } from '../styles/spacing';
+import { selectedLabAtom } from '../atoms/utilitiesAtom';
+import { infoModalDataAtom } from '../atoms/modalsAtom';
+import { previewModeAtom, playerLabTotalAmountAtom, previewLabTotalAmountAtom } from '../atoms/playerProgressAtom';
 
 const LabsScreen = () => {
-  // Add state to track expanded sections
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
+  const previewMode = useAtomValue(previewModeAtom);
+  const totalAmount = useAtomValue(previewMode ? previewLabTotalAmountAtom : playerLabTotalAmountAtom);
+  const setSelectedLab = useSetAtom(selectedLabAtom);
+  const setInfoModalData = useSetAtom(infoModalDataAtom);
+
+  useEffect(() => {
+    setSelectedLab(null);
+
+    return () => {
+      setInfoModalData(null);
+    };
+  }, []);
+
+  useEffect(() => {
+    setInfoModalData({
+      title: 'Labs Stats',
+      stats: [
+        { label: 'Labs Collected', value: `${totalAmount.toLocaleString()} / ${MAX_LAB_AMOUNT.toLocaleString()}` },
+        { label: 'Total Progress', value: `${(totalAmount / MAX_LAB_AMOUNT * 100).toFixed(2)}%` },
+      ],
+    });
+  }, [totalAmount, MAX_LAB_AMOUNT]);
 
   const sections = useMemo(() => {
     const grouped: Record<string, typeof LabData[number][]> = {};

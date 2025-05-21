@@ -8,9 +8,8 @@ import { selectedUpgradeAtom } from '../atoms/utilitiesAtom';
 export const useUpgradeData = (upgradeId?: string) => {
   const selectedUpgradeFromAtom = useAtomValue(selectedUpgradeAtom);
   const selectedUpgrade = upgradeId ?? selectedUpgradeFromAtom;
+  const previewMode = useAtomValue(previewModeAtom);
 
-  // always call these hooks to keep hook order consistent
-  const isPreview = useAtomValue(previewModeAtom);
   const [playerProgress, setPlayerProgress] = useAtom(playerUpgradeProgressAtom);
   const previewProgress = useAtomValue(previewUpgradeProgressAtom);
   const [upgradeAmount] = useAtom(upgradeAmountAtom);
@@ -29,7 +28,7 @@ export const useUpgradeData = (upgradeId?: string) => {
   }
 
   const meta = UpgradeDataMap[selectedUpgrade];
-  const progressMap = isPreview ? previewProgress : playerProgress;
+  const progressMap = previewMode ? previewProgress : playerProgress;
   const progress = progressMap[selectedUpgrade as keyof typeof progressMap] ?? 0;
   const maxLevel = meta?.maxLevel ?? 0;
 

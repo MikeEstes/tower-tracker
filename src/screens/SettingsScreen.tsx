@@ -6,6 +6,7 @@ import Constants from 'expo-constants';
 import { Colors } from '../types/colors';
 import { Spacing } from '../styles/spacing';
 import withBaseScreen from '../components/withBaseScreen';
+import { Typography } from '../styles/fonts';
 
 const SettingsScreen = () => {
   const version = Constants.expoConfig?.version || '1.0.0';
@@ -15,13 +16,13 @@ const SettingsScreen = () => {
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>About</Text>
         <Text style={styles.disclaimer}>
-          This is a fan-made utility for The Tower game. This application is not affiliated with, authorized, maintained, sponsored, or endorsed by The Tower or Tech Tree Games or any of its affiliates or subsidiaries.
+          {'This is a fan-made utility for The Tower game. This application is not affiliated with, authorized, maintained, sponsored, or endorsed by The Tower or Tech Tree Games or any of its affiliates or subsidiaries.'}
         </Text>
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Version</Text>
-        <Text style={styles.versionText}>v{version}</Text>
+        <Text style={styles.sectionTitle}>{'Version'}</Text>
+        <Text style={Typography.display}>{`v${version}`}</Text>
       </View>
     </ScrollView>
   );

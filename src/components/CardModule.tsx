@@ -1,22 +1,22 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 
-import { useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 
 import { Colors } from '../types/colors';
 import { Card, Rarity } from '../types/cards';
 import { cardModalAtom, cardModalDataAtom } from '../atoms/modalsAtom';
 import { useCardData } from '../hooks/useCardData';
-import { usePreviewMode } from '../hooks/usePreviewMode';
 import { selectedCardAtom } from '../atoms/utilitiesAtom';
 import { Spacing } from '../styles/spacing';
 import { Typography } from '../styles/fonts';
+import { previewModeAtom } from '../atoms/playerProgressAtom';
 
 const CardModule = (item: Card) => {
   const { id, name, rarity } = item;
   const { levelText, cardLevel, isSelected } = useCardData(id);
   const setSelectedCard = useSetAtom(selectedCardAtom);
-  const isPreview = usePreviewMode();
+  const previewMode = useAtomValue(previewModeAtom);
 
   const setCardModalData = useSetAtom(cardModalDataAtom);
   const setIsVisible = useSetAtom(cardModalAtom);
@@ -30,7 +30,7 @@ const CardModule = (item: Card) => {
   const borderColor = borderColorMap[rarity] ?? Colors.moduleBorder;
 
   const handleContainerPress = () => {
-    if (isPreview) return;
+    if (previewMode) return;
 
     setSelectedCard(id);
   };
@@ -47,7 +47,7 @@ const CardModule = (item: Card) => {
       </View>
       <View style={[styles.body, { borderColor }, isSelected && { borderColor: Colors.moduleBorderSelected }]}>
         <View style={styles.bodyTextContainer}>
-          <Text style={styles.bodyText}>{levelText}</Text>
+          <Text style={Typography.body}>{levelText}</Text>
         </View>
       </View>
       <View style={styles.footer}>
@@ -68,10 +68,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-  },
-  bodyText: {
-    ...Typography.display,
-    textAlign: 'center',
   },
   bodyTextContainer: {
     alignItems: 'center',

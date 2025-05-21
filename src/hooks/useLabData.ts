@@ -6,13 +6,13 @@ import { LabData } from '../data/LabData';
 import { selectedLabAtom } from '../atoms/utilitiesAtom';
 
 export const useLabData = (id: string) => {
-  const isPreview = useAtomValue(previewModeAtom);
+  const previewMode = useAtomValue(previewModeAtom);
   const meta = LabData.find(lab => lab.id === id);
   const selectedLabFromAtom = useAtomValue(selectedLabAtom);
   const [playerProgress, setPlayerProgress] = useAtom(playerLabProgressAtom);
   const previewProgress = useAtomValue(previewLabProgressAtom);
-  const progressMap = (isPreview ? previewProgress : playerProgress) || {};
-  const [upgradeAmount] = useAtom(upgradeAmountAtom);
+  const progressMap = (previewMode ? previewProgress : playerProgress) || {};
+  const upgradeAmount = useAtomValue(upgradeAmountAtom);
 
   if (!id || !meta) {
     if (__DEV__ && id) {

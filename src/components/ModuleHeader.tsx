@@ -7,7 +7,7 @@ import { useSetAtom } from 'jotai';
 
 import { Colors } from '../types/colors';
 import { Spacing } from '../styles/spacing';
-import { infoModalAtom, infoModalDataAtom } from '../atoms/modalsAtom';
+import { infoModalAtom } from '../atoms/modalsAtom';
 
 type ModuleHeaderProps = {
   title: string;
@@ -18,7 +18,6 @@ type ModuleHeaderProps = {
 const ModuleHeader = ({ title, bannerColor, showInfoButton = false }: ModuleHeaderProps) => {
   const navigation = useNavigation();
   const setInfoModalAtom = useSetAtom(infoModalAtom);
-  const setInfoModalData = useSetAtom(infoModalDataAtom);
 
   const handleBackPress = () => {
     navigation.goBack();
@@ -26,14 +25,6 @@ const ModuleHeader = ({ title, bannerColor, showInfoButton = false }: ModuleHead
 
   const handleInfoPress = () => {
     setInfoModalAtom(true);
-    setInfoModalData({
-      title: `${title} Statistics`,
-      stats: [
-        { label: 'Total Items', value: '0' },
-        { label: 'Items Collected', value: '0' },
-        { label: 'Completion Rate', value: '0%' },
-      ],
-    });
   };
 
   return (

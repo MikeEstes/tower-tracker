@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, View, FlatList } from 'react-native';
 
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 
 import CardModule from '../components/CardModule';
 import { CardData } from '../data/CardData';
@@ -10,15 +10,35 @@ import CardModal from '../components/CardModal';
 import withBaseScreen from '../components/withBaseScreen';
 import { playerCardTotalAmountAtom, previewCardTotalAmountAtom, previewModeAtom } from '../atoms/playerProgressAtom';
 import { Spacing } from '../styles/spacing';
+import { infoModalDataAtom } from '../atoms/modalsAtom';
+import { selectedCardAtom } from '../atoms/utilitiesAtom';
 
 const CardsScreen = () => {
   const previewMode = useAtomValue(previewModeAtom);
   const totalAmount = useAtomValue(previewMode ? previewCardTotalAmountAtom : playerCardTotalAmountAtom);
+  const setSelectedCard = useSetAtom(selectedCardAtom);
+  const setInfoModalData = useSetAtom(infoModalDataAtom);
   const maxAmount = CardData.length * 81;
 
-  console.log(`Cards Collected: ${totalAmount} / ${maxAmount}`);
-  console.log(`Gems Remaining: ${(maxAmount - totalAmount) * 20}`);
-  console.log(`Total Progress: ${(totalAmount / maxAmount * 100).toFixed(2)}%`);
+  useEffect(() => {
+    setSelectedCard(null);
+
+    return () => {
+      setInfoModalData(null);
+    };
+  }, []);
+
+  useEffect(() => {
+    setInfoModalData({
+      title: 'Cards Stats',
+      stats: [
+        { label: 'Cards Collected', value: `${totalAmount.toLocaleString()} / ${maxAmount.toLocaleString()}` },
+        { label: 'Gems Remaining', value: ((maxAmount - totalAmount) * 20).toLocaleString() },
+        { label: 'Total Progress', value: `${(totalAmount / maxAmount * 100).toFixed(2)}%` },
+      ],
+    });
+  }, [totalAmount, maxAmount]);
+
 
   return (
     <View style={styles.container}>

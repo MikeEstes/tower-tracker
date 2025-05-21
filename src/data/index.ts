@@ -15,4 +15,6 @@ export const UpgradeDataMap: Record<string, Upgrade> = AllUpgradeData.reduce(
     return map;
   },
   {} as Record<string, Upgrade>
-); 
+);
+
+export const MAX_UPGRADE_AMOUNT = Object.values(UpgradeDataMap).reduce((sum, upgrade) => sum + upgrade.maxLevel, 0);

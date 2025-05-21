@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 
-import { useSetAtom } from 'jotai';
+import { useSetAtom, useAtomValue } from 'jotai';
 
 import { Colors } from '../types/colors';
 import { useLabData } from '../hooks/useLabData';
-import { usePreviewMode } from '../hooks/usePreviewMode';
+import { previewModeAtom } from '../atoms/playerProgressAtom';
 import { labModalAtom, labModalDataAtom } from '../atoms/modalsAtom';
 import { Lab } from '../types/labs';
 import { selectedLabAtom } from '../atoms/utilitiesAtom';
@@ -16,13 +16,12 @@ const LabModule = (item: Lab) => {
   const { id, name } = item;
   const { progress, maxLevel, isMaxed, isSelected } = useLabData(id);
   const setSelectedLab = useSetAtom(selectedLabAtom);
-  const isPreview = usePreviewMode();
-
+  const previewMode = useAtomValue(previewModeAtom);
   const setIsVisible = useSetAtom(labModalAtom);
   const setLabModalData = useSetAtom(labModalDataAtom);
 
   const handleContainerPress = () => {
-    if (isPreview) return;
+    if (previewMode) return;
 
     setSelectedLab(id);
   };

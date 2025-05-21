@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, FlatList, View } from 'react-native';
 
 import { RouteProp } from '@react-navigation/native';
+import { useAtomValue, useSetAtom } from 'jotai';
 
 import type { RootStackParamList } from '../../App';
 import { AttackUpgradeData } from '../data/AttackUpgradeData';
@@ -11,6 +12,10 @@ import UpgradeModule from '../components/UpgradeModule';
 import UpgradeModal from '../components/UpgradeModal';
 import { Colors } from '../types/colors';
 import withBaseScreen from '../components/withBaseScreen';
+import { selectedUpgradeAtom } from '../atoms/utilitiesAtom';
+import { infoModalDataAtom } from '../atoms/modalsAtom';
+import { MAX_UPGRADE_AMOUNT } from '../data';
+import { playerUpgradeTotalAmountAtom, previewUpgradeTotalAmountAtom, previewModeAtom } from '../atoms/playerProgressAtom';
 
 // Map route param to banner colors and data sets
 const bannerColorMap = {
@@ -30,7 +35,29 @@ type UpgradeScreenProps = { route: UpgradeScreenRouteProp };
 
 const UpgradeScreen = ({ route }: UpgradeScreenProps) => {
   const { type } = route.params;
+  const previewMode = useAtomValue(previewModeAtom);
+  const totalAmount = useAtomValue(previewMode ? previewUpgradeTotalAmountAtom : playerUpgradeTotalAmountAtom);
   const upgradeData = dataMap[type];
+  const setSelectedUpgrade = useSetAtom(selectedUpgradeAtom);
+  const setInfoModalData = useSetAtom(infoModalDataAtom);
+
+  useEffect(() => {
+    setSelectedUpgrade(null);
+
+    return () => {
+      setInfoModalData(null);
+    };
+  }, []);
+
+  useEffect(() => {
+    setInfoModalData({
+      title: 'Upgrade Stats',
+      stats: [
+        { label: 'Upgrades Collected', value: `${totalAmount.toLocaleString()} / ${MAX_UPGRADE_AMOUNT.toLocaleString()}` },
+        { label: 'Total Progress', value: `${(totalAmount / MAX_UPGRADE_AMOUNT * 100).toFixed(2)}%` },
+      ],
+    });
+  }, [totalAmount, MAX_UPGRADE_AMOUNT]);
 
   return (
     <View style={styles.container}>

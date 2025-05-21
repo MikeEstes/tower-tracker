@@ -1223,3 +1223,5 @@ export const LabData: Lab[] = [
     section: 'Module Research',
   },
 ];
+
+export const MAX_LAB_AMOUNT = Object.values(LabData).reduce((sum, lab) => sum + lab.maxLevel, 0);

@@ -5,7 +5,9 @@ import { Colors } from '../types/colors';
 export const Typography = StyleSheet.create({
   body: {
     color: Colors.text,
-    fontSize: 12,
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   button: {
     color: Colors.text,
@@ -17,15 +19,22 @@ export const Typography = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  modalHeader: {
+    color: Colors.text,
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
   moduleHeader: {
     color: Colors.text,
     fontSize: 12,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   screenHeader: {
     color: Colors.text,
     fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   textSelected: {
     color: Colors.textSelected,

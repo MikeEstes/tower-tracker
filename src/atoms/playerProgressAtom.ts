@@ -279,6 +279,10 @@ export const playerCardTotalAmountAtom = atom((get) => {
   return Object.values(progress).reduce((sum, amount) => sum + amount, 0);
 });
 export const playerUpgradeProgressAtom = atom(DEFAULT_UPGRADE_PROGRESS);
+export const playerUpgradeTotalAmountAtom = atom((get) => {
+  const progress = get(playerUpgradeProgressAtom);
+  return Object.values(progress).reduce((sum, amount) => sum + amount, 0);
+});
 export const playerLabProgressAtom = atom(DEFAULT_LAB_PROGRESS);
 export const playerLabTotalAmountAtom = atom((get) => {
   const progress = get(playerLabProgressAtom);
@@ -289,9 +293,17 @@ export const playerTaggedLabsAtom = atom<string[]>([]);
 // Preview Mode Atoms
 export const previewModeAtom = atom(false);
 export const previewUpgradeProgressAtom = atom(DEFAULT_UPGRADE_PROGRESS);
+export const previewUpgradeTotalAmountAtom = atom((get) => {
+  const progress = get(previewUpgradeProgressAtom);
+  return Object.values(progress).reduce((sum, amount) => sum + amount, 0);
+});
 export const previewCardProgressAtom = atom(DEFAULT_CARD_PROGRESS);
 export const previewCardTotalAmountAtom = atom((get) => {
   const progress = get(previewCardProgressAtom);
   return Object.values(progress).reduce((sum, amount) => sum + amount, 0);
 });
 export const previewLabProgressAtom = atom(DEFAULT_LAB_PROGRESS);
+export const previewLabTotalAmountAtom = atom((get) => {
+  const progress = get(previewLabProgressAtom);
+  return Object.values(progress).reduce((sum, amount) => sum + amount, 0);
+});

@@ -1,28 +1,28 @@
 import React from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 
-import { useSetAtom } from 'jotai';
+import { useSetAtom, useAtomValue } from 'jotai';
 
 import { Upgrade } from '../types/upgrades';
 import { Colors } from '../types/colors';
 import { useUpgradeData } from '../hooks/useUpgradeData';
 import { upgradeModalAtom, upgradeModalDataAtom } from '../atoms/modalsAtom';
 import { selectedUpgradeAtom } from '../atoms/utilitiesAtom';
-import { usePreviewMode } from '../hooks/usePreviewMode';
 import { Spacing } from '../styles/spacing';
 import { Typography } from '../styles/fonts';
+import { previewModeAtom } from '../atoms/playerProgressAtom';
 
 const UpgradeModule = (item: Upgrade) => {
   const { id, name } = item;
   const { progress, isMaxed, isSelected } = useUpgradeData(id);
   const setSelectedUpgrade = useSetAtom(selectedUpgradeAtom);
-  const isPreview = usePreviewMode();
+  const previewMode = useAtomValue(previewModeAtom);
 
   const setIsVisible = useSetAtom(upgradeModalAtom);
   const setUpgradeModalData = useSetAtom(upgradeModalDataAtom);
 
   const handleContainerPress = () => {
-    if (isPreview) return;
+    if (previewMode) return;
 
     setSelectedUpgrade(id);
   };

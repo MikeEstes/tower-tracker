@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 import { Colors } from '../types/colors';
 import { Spacing } from '../styles/spacing';
+import { Typography } from '../styles/fonts';
 
 type ModalContentProps = {
   title: string;
@@ -15,10 +16,10 @@ const ModalContent = ({ title, description, children, footerContent }: ModalCont
   return (
     <View style={styles.modalContainer}>
       <View style={styles.modalHeader}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={Typography.modalHeader}>{title}</Text>
       </View>
       <View style={styles.modalBody}>
-        {description && <Text style={styles.description}>{description}</Text>}
+        {description && <Text style={Typography.body}>{description}</Text>}
         {children}
       </View>
       {footerContent && (
@@ -33,11 +34,6 @@ const ModalContent = ({ title, description, children, footerContent }: ModalCont
 export default ModalContent;
 
 const styles = StyleSheet.create({
-  description: {
-    color: Colors.text,
-    fontSize: 16,
-    textAlign: 'center',
-  },
   modalBody: {
     alignItems: 'center',
     height: '60%',
@@ -59,10 +55,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: '10%',
     justifyContent: 'center',
-  },
-  title: {
-    color: Colors.text,
-    fontSize: 24,
-    fontWeight: 'bold',
   },
 }); 

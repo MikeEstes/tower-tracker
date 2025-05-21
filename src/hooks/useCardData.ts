@@ -2,12 +2,11 @@ import { useMemo } from 'react';
 
 import { atom, useAtomValue, useSetAtom } from 'jotai';
 
-import { playerCardProgressAtom, previewCardProgressAtom } from '../atoms/playerProgressAtom';
+import { playerCardProgressAtom, previewCardProgressAtom, previewModeAtom } from '../atoms/playerProgressAtom';
 import { CardDataMap, CardLevels, CardAmounts } from '../data/CardData';
 import { Card } from '../types/cards';
 import { upgradeAmountAtom } from '../atoms/configurationAtom';
 import { selectedCardAtom } from '../atoms/utilitiesAtom';
-import { usePreviewMode } from './usePreviewMode';
 
 export interface UseCardDataReturn {
   id: Card['id'];
@@ -23,17 +22,17 @@ export interface UseCardDataReturn {
 
 export const useCardData = (id: Card['id']): UseCardDataReturn => {
   const selectedCardFromAtom = useAtomValue(selectedCardAtom);
-  const isPreview = usePreviewMode();
+  const previewMode = useAtomValue(previewModeAtom);
 
   const meta = CardDataMap[id];
   const upgradeAmount = useAtomValue(upgradeAmountAtom);
   const amount = upgradeAmount === 'MAX' ? 81 : parseInt(upgradeAmount, 10);
 
   // choose live or preview atom
-  const baseAtom = isPreview ? previewCardProgressAtom : playerCardProgressAtom;
+  const baseAtom = previewMode ? previewCardProgressAtom : playerCardProgressAtom;
   const progressAtom = useMemo(
     () => atom((get) => ((get(baseAtom) as any)[id] as number) ?? 0),
-    [id, isPreview]
+    [id, previewMode]
   );
   const progress = useAtomValue(progressAtom);
   const setPlayerProgress = useSetAtom(baseAtom);
