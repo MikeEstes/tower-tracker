@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { useSetAtom, useAtomValue } from 'jotai';
 
 import { Upgrade } from '../types/upgrades';
-import { Colors } from '../types/colors';
+import { Colors } from '../styles/colors';
 import { useUpgradeData } from '../hooks/useUpgradeData';
 import { upgradeModalAtom, upgradeModalDataAtom } from '../atoms/modalsAtom';
 import { selectedUpgradeAtom } from '../atoms/utilitiesAtom';

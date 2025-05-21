@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 
 import { useSetAtom, useAtomValue } from 'jotai';
 
-import { Colors } from '../types/colors';
+import { Colors } from '../styles/colors';
 import { useLabData } from '../hooks/useLabData';
 import { previewModeAtom } from '../atoms/playerProgressAtom';
 import { labModalAtom, labModalDataAtom } from '../atoms/modalsAtom';

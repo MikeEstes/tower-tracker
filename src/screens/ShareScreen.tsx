@@ -14,7 +14,7 @@ import {
   previewCardProgressAtom,
   previewLabProgressAtom,
 } from '../atoms/playerProgressAtom';
-import { Colors } from '../types/colors';
+import { Colors } from '../styles/colors';
 import { Spacing } from '../styles/spacing';
 import withBaseScreen from '../components/withBaseScreen';
 import { Typography } from '../styles/fonts';

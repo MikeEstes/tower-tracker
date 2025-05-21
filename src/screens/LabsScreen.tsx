@@ -4,7 +4,7 @@ import { StyleSheet, SectionList, View, Text, TouchableOpacity } from 'react-nat
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useSetAtom, useAtomValue } from 'jotai';
 
-import { Colors } from '../types/colors';
+import { Colors } from '../styles/colors';
 import withBaseScreen from '../components/withBaseScreen';
 import { LabData, MAX_LAB_AMOUNT } from '../data/LabData';
 import LabModule from '../components/LabModule';

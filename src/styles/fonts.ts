@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { Colors } from '../types/colors';
+import { Colors } from './colors';
 
 export const Typography = StyleSheet.create({
   body: {
@@ -38,5 +38,18 @@ export const Typography = StyleSheet.create({
   },
   textSelected: {
     color: Colors.textSelected,
+  },
+  toastHeader: {
+    color: Colors.text,
+    flexWrap: 'wrap',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  toastText: {
+    color: Colors.text,
+    flexWrap: 'wrap',
+    fontSize: 14,
+    textAlign: 'center',
   },
 });

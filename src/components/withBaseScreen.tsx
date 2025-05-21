@@ -5,7 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAtom } from 'jotai';
 
 import ModuleHeader from './ModuleHeader';
-import { Colors } from '../types/colors';
+import { Colors } from '../styles/colors';
 import ModuleFooter from './ModuleFooter';
 import { currentModuleTypeAtom, ModuleType } from '../atoms/configurationAtom';
 

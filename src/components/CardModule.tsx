@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 
 import { useAtomValue, useSetAtom } from 'jotai';
 
-import { Colors } from '../types/colors';
+import { Colors } from '../styles/colors';
 import { Card, Rarity } from '../types/cards';
 import { cardModalAtom, cardModalDataAtom } from '../atoms/modalsAtom';
 import { useCardData } from '../hooks/useCardData';

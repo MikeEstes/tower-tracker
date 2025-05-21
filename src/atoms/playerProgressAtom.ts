@@ -1,6 +1,8 @@
 import { atom } from 'jotai';
 
-const DEFAULT_CARD_PROGRESS = {
+import { CardProgress, UpgradeProgress, LabProgress } from '../types/progress';
+
+export const DEFAULT_CARD_PROGRESS: CardProgress = {
   damage: 0,
   attackSpeed: 0,
   health: 0,
@@ -32,7 +34,7 @@ const DEFAULT_CARD_PROGRESS = {
   nuke: 0,
 };
 
-const DEFAULT_UPGRADE_PROGRESS = {
+export const DEFAULT_UPGRADE_PROGRESS: UpgradeProgress = {
   // Attack Upgrades
   damage: 0,
   attackSpeed: 0,
@@ -84,9 +86,9 @@ const DEFAULT_UPGRADE_PROGRESS = {
   packageChance: 0,
   enemyAttackLevelSkip: 0,
   enemyHealthLevelSkip: 0,
-}
+};
 
-const DEFAULT_LAB_PROGRESS = {
+export const DEFAULT_LAB_PROGRESS: LabProgress = {
   // Main Research
   gameSpeed: 0,
   startingCash: 0,
@@ -248,42 +250,20 @@ const DEFAULT_LAB_PROGRESS = {
   fastEnemyHealth: 0,
   fastEnemyAttack: 0,
   fastEnemySpeed: 0,
-  tankEnemyHealth: 0,
-  tankEnemyAttack: 0,
-  rangedEnemyHealth: 0,
-  rangedEnemyAttack: 0,
-  bossHealth: 0,
-  bossAttack: 0,
-  protectorHealth: 0,
-  protectorRadius: 0,
-  protectorDamageReduction: 0,
-  // Module Research
-  commonDropChance: 0,
-  rerollShards: 0,
-  dailyMissionShards: 0,
-  moduleShardCosts: 0,
-  moduleCoinCosts: 0,
-  rareDropChance: 0,
-  unmergeModule: 0,
-  shatterShards: 0,
-  cannonEffectBans: 0,
-  armorEffectBans: 0,
-  generatorEffectBans: 0,
-  coreEffectBans: 0,
 };
 
 // Player Data Atoms
-export const playerCardProgressAtom = atom(DEFAULT_CARD_PROGRESS);
+export const playerCardProgressAtom = atom<CardProgress>(DEFAULT_CARD_PROGRESS);
 export const playerCardTotalAmountAtom = atom((get) => {
   const progress = get(playerCardProgressAtom);
   return Object.values(progress).reduce((sum, amount) => sum + amount, 0);
 });
-export const playerUpgradeProgressAtom = atom(DEFAULT_UPGRADE_PROGRESS);
+export const playerUpgradeProgressAtom = atom<UpgradeProgress>(DEFAULT_UPGRADE_PROGRESS);
 export const playerUpgradeTotalAmountAtom = atom((get) => {
   const progress = get(playerUpgradeProgressAtom);
   return Object.values(progress).reduce((sum, amount) => sum + amount, 0);
 });
-export const playerLabProgressAtom = atom(DEFAULT_LAB_PROGRESS);
+export const playerLabProgressAtom = atom<LabProgress>(DEFAULT_LAB_PROGRESS);
 export const playerLabTotalAmountAtom = atom((get) => {
   const progress = get(playerLabProgressAtom);
   return Object.values(progress).reduce((sum, amount) => sum + amount, 0);
@@ -292,17 +272,17 @@ export const playerTaggedLabsAtom = atom<string[]>([]);
 
 // Preview Mode Atoms
 export const previewModeAtom = atom(false);
-export const previewUpgradeProgressAtom = atom(DEFAULT_UPGRADE_PROGRESS);
+export const previewUpgradeProgressAtom = atom<UpgradeProgress>(DEFAULT_UPGRADE_PROGRESS);
 export const previewUpgradeTotalAmountAtom = atom((get) => {
   const progress = get(previewUpgradeProgressAtom);
   return Object.values(progress).reduce((sum, amount) => sum + amount, 0);
 });
-export const previewCardProgressAtom = atom(DEFAULT_CARD_PROGRESS);
+export const previewCardProgressAtom = atom<CardProgress>(DEFAULT_CARD_PROGRESS);
 export const previewCardTotalAmountAtom = atom((get) => {
   const progress = get(previewCardProgressAtom);
   return Object.values(progress).reduce((sum, amount) => sum + amount, 0);
 });
-export const previewLabProgressAtom = atom(DEFAULT_LAB_PROGRESS);
+export const previewLabProgressAtom = atom<LabProgress>(DEFAULT_LAB_PROGRESS);
 export const previewLabTotalAmountAtom = atom((get) => {
   const progress = get(previewLabProgressAtom);
   return Object.values(progress).reduce((sum, amount) => sum + amount, 0);

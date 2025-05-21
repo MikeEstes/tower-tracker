@@ -10,7 +10,7 @@ import { DefenseUpgradeData } from '../data/DefenseUpgradeData';
 import { UtilityUpgradeData } from '../data/UtilityUpgradeData';
 import UpgradeModule from '../components/UpgradeModule';
 import UpgradeModal from '../components/UpgradeModal';
-import { Colors } from '../types/colors';
+import { Colors } from '../styles/colors';
 import withBaseScreen from '../components/withBaseScreen';
 import { selectedUpgradeAtom } from '../atoms/utilitiesAtom';
 import { infoModalDataAtom } from '../atoms/modalsAtom';

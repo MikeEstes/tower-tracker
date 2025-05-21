@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { useAtomValue, useSetAtom } from 'jotai';
 
 import { infoModalAtom, infoModalDataAtom } from '../atoms/modalsAtom';
-import { Colors } from '../types/colors';
+import { Colors } from '../styles/colors';
 import BaseModal from './BaseModal';
 import ModalContent from './ModalContent';
 import { Spacing } from '../styles/spacing';

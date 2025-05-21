@@ -4,7 +4,7 @@ import { Text } from 'react-native';
 import { useAtomValue, useSetAtom } from 'jotai';
 
 import { upgradeModalAtom, upgradeModalDataAtom } from '../atoms/modalsAtom';
-import { Colors } from '../types/colors';
+import { Colors } from '../styles/colors';
 import { useUpgradeData } from '../hooks/useUpgradeData';
 import BaseModal from './BaseModal';
 import ModalContent from './ModalContent';

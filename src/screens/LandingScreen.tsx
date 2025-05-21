@@ -7,7 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
 import type { RootStackParamList } from '../../App';
-import { Colors } from '../types/colors';
+import { Colors } from '../styles/colors';
 import { Spacing } from '../styles/spacing';
 import { Typography } from '../styles/fonts';
 

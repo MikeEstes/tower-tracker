@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSetAtom } from 'jotai';
 
-import { Colors } from '../types/colors';
+import { Colors } from '../styles/colors';
 import { Spacing } from '../styles/spacing';
 import { infoModalAtom } from '../atoms/modalsAtom';
 

@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Toast from 'react-native-toast-message';
 
 import LandingScreen from './src/screens/LandingScreen';
 import UpgradeScreen from './src/screens/UpgradeScreen';
@@ -18,6 +19,7 @@ import DevScreen from './src/screens/DevScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 import StorageSync from './src/components/StorageSync';
 import InfoModal from './src/components/InfoModal';
+import ToastConfig from './src/configs/toastConfig';
 
 // Define the navigation param list for type safety
 export type RootStackParamList = {
@@ -60,6 +62,7 @@ const App = () => {
           <InfoModal />
         </NavigationContainer>
         <StatusBar hidden={true} />
+        <Toast config={ToastConfig} />
       </SafeAreaProvider>
     </Provider>
   );

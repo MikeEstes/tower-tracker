@@ -1,12 +1,14 @@
 import { compressToBase64, decompressFromBase64 } from 'lz-string';
 
+import { CardProgress, UpgradeProgress, LabProgress } from '../types/progress';
+
 // Full payload with versioning
 export interface FullProgressPayload {
   version: number;
   data: {
-    upgradeProgress: Record<string, number>;
-    cardProgress: Record<string, number>;
-    labProgress: Record<string, number>;
+    upgradeProgress: UpgradeProgress;
+    cardProgress: CardProgress;
+    labProgress: LabProgress;
   };
 }
 
@@ -14,9 +16,9 @@ const VERSION = 1;
 
 // Export both upgrade and card progress to a compressed Base64 string
 export function exportProgress(
-  upgradeProgress: Record<string, number>,
-  cardProgress: Record<string, number>,
-  labProgress: Record<string, number>
+  upgradeProgress: UpgradeProgress,
+  cardProgress: CardProgress,
+  labProgress: LabProgress
 ): string {
   const payload: FullProgressPayload = {
     version: VERSION,
@@ -34,9 +36,9 @@ export function exportProgress(
 export function importProgress(
   code: string
 ): {
-  upgradeProgress: Record<string, number>;
-  cardProgress: Record<string, number>;
-  labProgress: Record<string, number>;
+  upgradeProgress: UpgradeProgress;
+  cardProgress: CardProgress;
+  labProgress: LabProgress;
 } {
   const json = decompressFromBase64(code);
   if (!json) {

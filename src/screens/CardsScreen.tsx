@@ -5,7 +5,7 @@ import { useAtomValue, useSetAtom } from 'jotai';
 
 import CardModule from '../components/CardModule';
 import { CardData } from '../data/CardData';
-import { Colors } from '../types/colors';
+import { Colors } from '../styles/colors';
 import CardModal from '../components/CardModal';
 import withBaseScreen from '../components/withBaseScreen';
 import { playerCardTotalAmountAtom, previewCardTotalAmountAtom, previewModeAtom } from '../atoms/playerProgressAtom';

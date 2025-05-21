@@ -3,7 +3,7 @@ import { StyleSheet, Modal, Pressable } from 'react-native';
 
 import { Atom, useAtom } from 'jotai';
 
-import { Colors } from '../types/colors';
+import { Colors } from '../styles/colors';
 
 type BaseModalProps = {
   children: React.ReactNode;

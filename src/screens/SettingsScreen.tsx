@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, ScrollView } from 'react-native';
 
 import Constants from 'expo-constants';
 
-import { Colors } from '../types/colors';
+import { Colors } from '../styles/colors';
 import { Spacing } from '../styles/spacing';
 import withBaseScreen from '../components/withBaseScreen';
 import { Typography } from '../styles/fonts';
