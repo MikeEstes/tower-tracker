@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import type { RootStackParamList } from '../../App';
 import { Colors } from '../types/colors';
+import { Spacing } from '../styles/spacing';
 
 // Define navigation prop type for this screen
 type LandingScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Landing'>;
@@ -124,17 +125,17 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.background,
     flex: 1,
-    padding: 16,
+    padding: Spacing.md,
   },
   devButton: {
     backgroundColor: Colors.devBanner,
     borderColor: Colors.moduleBorder,
     borderRadius: 8,
     borderWidth: 2,
-    bottom: 16,
-    padding: 12,
+    bottom: 25,
+    padding: Spacing.md,
     position: 'absolute',
-    right: 16,
+    right: 25,
   },
   devButtonText: {
     color: Colors.text,

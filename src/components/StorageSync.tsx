@@ -7,14 +7,14 @@ import { exportProgress, importProgress } from '../utils/progressShare';
 import {
   playerUpgradeProgressAtom,
   playerCardProgressAtom,
-  playerLabsProgressAtom,
+  playerLabProgressAtom,
 } from '../atoms/playerProgressAtom';
 
 // Component to sync progress to AsyncStorage
 export default function StorageSync() {
   const [upgrades, setUpgrades] = useAtom(playerUpgradeProgressAtom);
   const [cards, setCards] = useAtom(playerCardProgressAtom);
-  const [labs, setLabs] = useAtom(playerLabsProgressAtom);
+  const [labs, setLabs] = useAtom(playerLabProgressAtom);
 
   // On mount: load saved code and hydrate state
   useEffect(() => {

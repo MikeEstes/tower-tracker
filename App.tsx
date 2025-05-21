@@ -16,7 +16,6 @@ import RelicsScreen from './src/screens/RelicsScreen';
 import ModulesScreen from './src/screens/ModulesScreen';
 import DevScreen from './src/screens/DevScreen';
 import StorageSync from './src/components/StorageSync';
-import PreviewButton from './src/components/PreviewButton';
 
 // Define the navigation param list for type safety
 export type RootStackParamList = {
@@ -55,7 +54,6 @@ export default function App() {
             <Stack.Screen name="Dev" component={DevScreen} options={{ title: 'Dev Menu' }} />
           </Stack.Navigator>
         </NavigationContainer>
-        <PreviewButton />
         <StatusBar hidden={true} />
       </SafeAreaProvider>
     </Provider>

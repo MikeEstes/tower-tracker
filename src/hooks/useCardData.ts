@@ -2,10 +2,12 @@ import { useMemo } from 'react';
 
 import { atom, useAtomValue, useSetAtom } from 'jotai';
 
-import { playerCardProgressAtom, previewModeAtom, previewCardProgressAtom } from '../atoms/playerProgressAtom';
+import { playerCardProgressAtom, previewCardProgressAtom } from '../atoms/playerProgressAtom';
 import { CardDataMap, CardLevels, CardAmounts } from '../data/CardData';
 import { Card } from '../types/cards';
 import { upgradeAmountAtom } from '../atoms/configurationAtom';
+import { selectedCardAtom } from '../atoms/utilitiesAtom';
+import { usePreviewMode } from './usePreviewMode';
 
 export interface UseCardDataReturn {
   id: Card['id'];
@@ -14,21 +16,24 @@ export interface UseCardDataReturn {
   progress: number;
   cardLevel: number;
   levelText: string;
+  isSelected: boolean;
   increment: () => void;
   decrement: () => void;
 }
 
 export const useCardData = (id: Card['id']): UseCardDataReturn => {
-  const previewMode = useAtomValue(previewModeAtom);
+  const selectedCardFromAtom = useAtomValue(selectedCardAtom);
+  const isPreview = usePreviewMode();
+
   const meta = CardDataMap[id];
   const upgradeAmount = useAtomValue(upgradeAmountAtom);
   const amount = upgradeAmount === 'MAX' ? 81 : parseInt(upgradeAmount, 10);
 
   // choose live or preview atom
-  const baseAtom = previewMode ? previewCardProgressAtom : playerCardProgressAtom;
+  const baseAtom = isPreview ? previewCardProgressAtom : playerCardProgressAtom;
   const progressAtom = useMemo(
     () => atom((get) => ((get(baseAtom) as any)[id] as number) ?? 0),
-    [id, previewMode]
+    [id, isPreview]
   );
   const progress = useAtomValue(progressAtom);
   const setPlayerProgress = useSetAtom(baseAtom);
@@ -92,6 +97,8 @@ export const useCardData = (id: Card['id']): UseCardDataReturn => {
     updateProgress(-amount);
   };
 
+  const isSelected = selectedCardFromAtom === id;
+
   return {
     id,
     name: meta?.name ?? '',
@@ -99,6 +106,7 @@ export const useCardData = (id: Card['id']): UseCardDataReturn => {
     progress,
     cardLevel,
     levelText,
+    isSelected,
     increment,
     decrement,
   };

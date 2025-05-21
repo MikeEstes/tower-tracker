@@ -8,6 +8,7 @@ import { labModalAtom, labModalDataAtom } from '../atoms/modalsAtom';
 import { Colors } from '../types/colors';
 import BaseModal from './BaseModal';
 import { useLabData } from '../hooks/useLabData';
+import { Spacing } from '../styles/spacing';
 
 const LabModal = () => {
   const labId = useAtomValue(labModalDataAtom) as Lab['id'];
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     maxHeight: '80%',
     maxWidth: '80%',
-    padding: 16,
+    padding: Spacing.lg,
   },
   modalFooter: {
     height: '10%',

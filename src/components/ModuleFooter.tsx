@@ -6,12 +6,30 @@ import { useAtom, useAtomValue } from 'jotai';
 import { Colors } from '../types/colors';
 import { upgradeAmountAtom, currentModuleTypeAtom } from '../atoms/configurationAtom';
 import { useModuleActions } from '../hooks/useModuleActions';
+import { previewModeAtom } from '../atoms/playerProgressAtom';
+import { Spacing } from '../styles/spacing';
+import { Typography } from '../styles/fonts';
+
+type FooterButtonProps = {
+  onPress: () => void;
+  text: string;
+}
+
+const FooterButton = ({ onPress, text }: FooterButtonProps) => {
+  return (
+    <TouchableOpacity style={styles.button} onPress={onPress}>
+      <Text style={Typography.button}>{text}</Text>
+    </TouchableOpacity>
+  )
+}
+
 
 const ModuleFooter = () => {
   const options = ['1', '5', '10', '100', 'MAX'] as const;
   const [upgradeAmount, setUpgradeAmount] = useAtom(upgradeAmountAtom);
   const moduleType = useAtomValue(currentModuleTypeAtom);
   const { increment, decrement } = useModuleActions();
+  const [previewMode, setPreviewMode] = useAtom(previewModeAtom);
 
   // If no module type is set, don't show the footer
   if (!moduleType) {
@@ -26,17 +44,18 @@ const ModuleFooter = () => {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={decrement}>
-        <Text style={styles.buttonText}>{'-'}</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.button} onPress={toggleUpgradeOption}>
-        <Text style={styles.buttonText}>{`${upgradeAmount === 'MAX' ? '' : 'x'} ${upgradeAmount}`}</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.button} onPress={increment}>
-        <Text style={styles.buttonText}>{'+'}</Text>
-      </TouchableOpacity>
+      {previewMode ? (
+        <View style={styles.previewModeContainer}>
+          <Text style={styles.previewModeText}>{'Preview Mode'}</Text>
+          <FooterButton onPress={() => setPreviewMode(false)} text={'Exit Preview'} />
+        </View>
+      ) : (
+        <>
+          <FooterButton onPress={decrement} text={'-'} />
+          <FooterButton onPress={toggleUpgradeOption} text={`${upgradeAmount === 'MAX' ? '' : 'x'} ${upgradeAmount}`} />
+          <FooterButton onPress={increment} text={'+'} />
+        </>
+      )}
     </View>
   );
 };
@@ -63,7 +82,22 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.footerColor,
     flexDirection: 'row',
-    padding: 8,
+    padding: Spacing.md,
     width: '100%',
+  },
+  previewModeContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    gap: 6,
+    justifyContent: 'space-between',
+    paddingHorizontal: 12,
+    width: '100%',
+  },
+  previewModeText: {
+    color: Colors.text,
+    flex: 1,
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });

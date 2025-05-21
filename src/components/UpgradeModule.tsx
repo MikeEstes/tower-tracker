@@ -9,6 +9,8 @@ import { useUpgradeData } from '../hooks/useUpgradeData';
 import { upgradeModalAtom, upgradeModalDataAtom } from '../atoms/modalsAtom';
 import { selectedUpgradeAtom } from '../atoms/utilitiesAtom';
 import { usePreviewMode } from '../hooks/usePreviewMode';
+import { Spacing } from '../styles/spacing';
+import { Typography } from '../styles/fonts';
 
 const UpgradeModule = (item: Upgrade) => {
   const { id, name } = item;
@@ -32,12 +34,12 @@ const UpgradeModule = (item: Upgrade) => {
 
   return (
     <View style={[styles.container, isSelected && styles.containerSelected]}>
-      <Pressable style={styles.nameContainer} onPress={handleContainerPress} onLongPress={handleContainerLongPress}>
-        <Text style={[styles.text, isSelected && styles.textSelected]}>{name}</Text>
+      <Pressable style={styles.header} onPress={handleContainerPress} onLongPress={handleContainerLongPress}>
+        <Text style={[Typography.moduleHeader, isSelected && Typography.textSelected]}>{name}</Text>
       </Pressable>
       <View style={[styles.controlsContainer, isMaxed && styles.containerMaxed]}>
         <View style={styles.displayContainer}>
-          <Text style={styles.text}>{progress}</Text>
+          <Text style={Typography.display}>{progress}</Text>
         </View>
       </View>
     </View>
@@ -53,7 +55,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     flexDirection: 'row',
     height: 80,
-    padding: 4,
+    padding: Spacing.sm,
   },
   containerMaxed: {
     backgroundColor: Colors.moduleBackgroundMaxed,
@@ -73,16 +75,8 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: 'center',
   },
-  nameContainer: {
+  header: {
     flex: 3,
     justifyContent: 'center',
-  },
-  text: {
-    color: Colors.text,
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-  textSelected: {
-    color: Colors.textSelected,
   },
 });

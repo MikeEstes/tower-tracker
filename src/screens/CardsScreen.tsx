@@ -9,6 +9,7 @@ import { Colors } from '../types/colors';
 import CardModal from '../components/CardModal';
 import withBaseScreen from '../components/withBaseScreen';
 import { playerCardTotalAmountAtom, previewCardTotalAmountAtom, previewModeAtom } from '../atoms/playerProgressAtom';
+import { Spacing } from '../styles/spacing';
 
 const CardsScreen = () => {
   const previewMode = useAtomValue(previewModeAtom);
@@ -46,15 +47,15 @@ export default withBaseScreen(CardsScreen, {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 8,
+    padding: Spacing.md,
   },
   listItem: {
     flex: .25,
   },
   row: {
     flex: 1,
-    gap: 6,
+    gap: Spacing.sm,
     justifyContent: 'flex-start',
-    marginBottom: 6,
+    marginBottom: Spacing.sm,
   },
 }); 

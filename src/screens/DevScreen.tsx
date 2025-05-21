@@ -6,6 +6,7 @@ import { useAtom } from 'jotai';
 import { Colors } from '../types/colors';
 import withBaseScreen from '../components/withBaseScreen';
 import { previewModeAtom } from '../atoms/playerProgressAtom';
+import { Spacing } from '../styles/spacing';
 
 const DevScreen = () => {
   const [previewMode, setPreviewMode] = useAtom(previewModeAtom);
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.background,
     flex: 1,
-    padding: 8,
+    padding: Spacing.md,
   },
   title: {
     color: Colors.text,

@@ -9,10 +9,12 @@ import { cardModalAtom, cardModalDataAtom } from '../atoms/modalsAtom';
 import { useCardData } from '../hooks/useCardData';
 import { usePreviewMode } from '../hooks/usePreviewMode';
 import { selectedCardAtom } from '../atoms/utilitiesAtom';
+import { Spacing } from '../styles/spacing';
+import { Typography } from '../styles/fonts';
 
 const CardModule = (item: Card) => {
   const { id, name, rarity } = item;
-  const { levelText, cardLevel } = useCardData(id);
+  const { levelText, cardLevel, isSelected } = useCardData(id);
   const setSelectedCard = useSetAtom(selectedCardAtom);
   const isPreview = usePreviewMode();
 
@@ -28,6 +30,8 @@ const CardModule = (item: Card) => {
   const borderColor = borderColorMap[rarity] ?? Colors.moduleBorder;
 
   const handleContainerPress = () => {
+    if (isPreview) return;
+
     setSelectedCard(id);
   };
 
@@ -37,11 +41,11 @@ const CardModule = (item: Card) => {
   };
 
   return (
-    <Pressable style={[styles.container, { borderColor }]} onPress={handleContainerPress} onLongPress={handleContainerLongPress}>
+    <Pressable style={[styles.container, { borderColor }, isSelected && styles.containerSelected]} onPress={handleContainerPress} onLongPress={handleContainerLongPress}>
       <View style={styles.header}>
-        <Text style={styles.title}>{name}</Text>
+        <Text style={[Typography.moduleHeader, isSelected && Typography.textSelected]}>{name}</Text>
       </View>
-      <View style={[styles.body, { borderColor }]}>
+      <View style={[styles.body, { borderColor }, isSelected && { borderColor: Colors.moduleBorderSelected }]}>
         <View style={styles.bodyTextContainer}>
           <Text style={styles.bodyText}>{levelText}</Text>
         </View>
@@ -66,9 +70,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   bodyText: {
-    color: Colors.text,
-    fontSize: 24,
-    fontWeight: 'bold',
+    ...Typography.display,
     textAlign: 'center',
   },
   bodyTextContainer: {
@@ -82,6 +84,10 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     height: 120,
   },
+  containerSelected: {
+    backgroundColor: Colors.moduleBackgroundSelected,
+    borderColor: Colors.moduleBorderSelected,
+  },
   footer: {
     alignItems: 'center',
     height: '20%',
@@ -89,21 +95,13 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   footerText: {
-    color: Colors.text,
-    fontSize: 16,
-    fontWeight: 'bold',
+    ...Typography.display,
     textAlign: 'center',
   },
   header: {
     alignItems: 'center',
-    height: '20%',
+    //height: '20%',
     justifyContent: 'center',
-    padding: 4,
+    padding: Spacing.sm,
   },
-  title: {
-    color: Colors.text,
-    fontSize: 12,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  }
 });

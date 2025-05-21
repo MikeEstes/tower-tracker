@@ -1,24 +1,26 @@
 import { useAtom, useAtomValue } from 'jotai';
 
-import { playerLabsProgressAtom, previewModeAtom, previewLabsProgressAtom } from '../atoms/playerProgressAtom';
+import { playerLabProgressAtom, previewModeAtom, previewLabProgressAtom } from '../atoms/playerProgressAtom';
 import { upgradeAmountAtom } from '../atoms/configurationAtom';
 import { LabData } from '../data/LabData';
+import { selectedLabAtom } from '../atoms/utilitiesAtom';
 
 export const useLabData = (id: string) => {
   const isPreview = useAtomValue(previewModeAtom);
   const meta = LabData.find(lab => lab.id === id);
-  const [playerProgress, setPlayerProgress] = useAtom(playerLabsProgressAtom);
-  const previewProgress = useAtomValue(previewLabsProgressAtom);
+  const selectedLabFromAtom = useAtomValue(selectedLabAtom);
+  const [playerProgress, setPlayerProgress] = useAtom(playerLabProgressAtom);
+  const previewProgress = useAtomValue(previewLabProgressAtom);
   const progressMap = (isPreview ? previewProgress : playerProgress) || {};
   const [upgradeAmount] = useAtom(upgradeAmountAtom);
 
-  if (!meta) {
-    if (__DEV__) {
+  if (!id || !meta) {
+    if (__DEV__ && id) {
       console.warn(`Lab with id '${id}' not found in LabsData.`);
     }
     return {
-      id,
-      name: id,
+      id: id ?? '',
+      name: id ?? '',
       description: '',
       maxLevel: 0,
       progress: 0,
@@ -51,6 +53,7 @@ export const useLabData = (id: string) => {
   };
 
   const isMaxed = progress >= maxLevel;
+  const isSelected = selectedLabFromAtom === id;
 
   return {
     id,
@@ -61,5 +64,6 @@ export const useLabData = (id: string) => {
     increment,
     decrement,
     isMaxed,
+    isSelected,
   };
 }; 

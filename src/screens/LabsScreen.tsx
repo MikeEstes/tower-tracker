@@ -8,6 +8,7 @@ import withBaseScreen from '../components/withBaseScreen';
 import { LabData } from '../data/LabData';
 import LabModule from '../components/LabModule';
 import LabModal from '../components/LabModal';
+import { Spacing } from '../styles/spacing';
 
 const LabsScreen = () => {
   // Add state to track expanded sections
@@ -64,7 +65,7 @@ const LabsScreen = () => {
               {row.map(lab => (
                 <LabModule key={lab.id} {...lab} />
               ))}
-              {row.length === 1 && <View style={[styles.itemContainer, styles.placeholder]} />}
+              {row.length === 1 && <View style={styles.placeholder} />}
             </View>
           );
         }}
@@ -83,7 +84,7 @@ export default withBaseScreen(LabsScreen, {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 8,
+    padding: Spacing.md,
   },
   header: {
     color: Colors.text,
@@ -92,26 +93,22 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     alignItems: 'center',
+    backgroundColor: Colors.moduleBackgroundSelected,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 8,
-    marginTop: 16,
-  },
-  itemContainer: {
-    backgroundColor: '#f9f9f9',
-    borderRadius: 8,
-    flex: 1,
-    padding: 12,
+    marginVertical: Spacing.md,
+    padding: Spacing.md,
   },
   placeholder: {
     backgroundColor: 'transparent',
     flex: 1,
+    margin: Spacing.sm,
   },
   row: {
     flexDirection: 'row',
     flex: 1,
-    gap: 6,
+    gap: Spacing.sm,
     justifyContent: 'flex-start',
-    marginBottom: 6,
+    marginBottom: Spacing.sm,
   },
 }); 

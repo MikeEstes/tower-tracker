@@ -8,6 +8,7 @@ import { cardModalAtom, cardModalDataAtom } from '../atoms/modalsAtom';
 import { Colors } from '../types/colors';
 import BaseModal from './BaseModal';
 import { useCardData } from '../hooks/useCardData';
+import { Spacing } from '../styles/spacing';
 
 const CardModal = () => {
   const cardId = useAtomValue(cardModalDataAtom) as Card['id'];
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     maxHeight: '80%',
     maxWidth: '80%',
-    padding: 16,
+    padding: Spacing.lg,
   },
   modalFooter: {
     height: '10%',

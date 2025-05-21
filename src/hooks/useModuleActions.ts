@@ -12,12 +12,11 @@ export const useModuleActions = () => {
   const selectedCard = useAtomValue(selectedCardAtom);
   const selectedLab = useAtomValue(selectedLabAtom);
 
-  // Get the appropriate data hook based on module type
+  // Call all hooks unconditionally to follow the rules of hooks
   const upgradeData = useUpgradeData(selectedUpgrade ?? '');
-  const cardData = useCardData(selectedCard as any ?? ''); // Type assertion needed due to Card type
+  const cardData = useCardData(selectedCard as any ?? '');
   const labData = useLabData(selectedLab ?? '');
 
-  // Return the appropriate increment/decrement methods based on module type
   switch (moduleType) {
     case 'card':
       return {

@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { Colors } from '../types/colors';
+import { Spacing } from '../styles/spacing';
 
 type ModuleHeaderProps = {
   title: string;
@@ -45,12 +46,12 @@ const styles = StyleSheet.create({
     borderColor: Colors.moduleBorder,
     borderRadius: 10,
     borderWidth: 2,
-    padding: 4,
+    padding: Spacing.sm,
   },
   container: {
     gap: 8,
     justifyContent: 'center',
-    padding: 16,
+    padding: Spacing.lg,
     width: '100%',
   },
   headerContainer: {
@@ -69,6 +70,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.moduleBorder,
     borderRadius: 10,
     borderWidth: 2,
-    padding: 4,
+    padding: Spacing.sm,
   },
 });

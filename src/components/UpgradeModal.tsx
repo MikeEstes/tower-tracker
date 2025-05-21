@@ -7,6 +7,7 @@ import { upgradeModalAtom, upgradeModalDataAtom } from '../atoms/modalsAtom';
 import { Colors } from '../types/colors';
 import { useUpgradeData } from '../hooks/useUpgradeData';
 import BaseModal from './BaseModal';
+import { Spacing } from '../styles/spacing';
 
 const UpgradeModal = () => {
   const upgradeId = useAtomValue(upgradeModalDataAtom);
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     maxHeight: '80%',
     maxWidth: '80%',
-    padding: 16,
+    padding: Spacing.lg,
   },
   modalFooter: {
     height: '10%',

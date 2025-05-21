@@ -86,7 +86,7 @@ const DEFAULT_UPGRADE_PROGRESS = {
   enemyHealthLevelSkip: 0,
 }
 
-const DEFAULT_LABS_PROGRESS = {
+const DEFAULT_LAB_PROGRESS = {
   // Main Research
   gameSpeed: 0,
   startingCash: 0,
@@ -279,7 +279,11 @@ export const playerCardTotalAmountAtom = atom((get) => {
   return Object.values(progress).reduce((sum, amount) => sum + amount, 0);
 });
 export const playerUpgradeProgressAtom = atom(DEFAULT_UPGRADE_PROGRESS);
-export const playerLabsProgressAtom = atom(DEFAULT_LABS_PROGRESS);
+export const playerLabProgressAtom = atom(DEFAULT_LAB_PROGRESS);
+export const playerLabTotalAmountAtom = atom((get) => {
+  const progress = get(playerLabProgressAtom);
+  return Object.values(progress).reduce((sum, amount) => sum + amount, 0);
+});
 export const playerTaggedLabsAtom = atom<string[]>([]);
 
 // Preview Mode Atoms
@@ -290,4 +294,4 @@ export const previewCardTotalAmountAtom = atom((get) => {
   const progress = get(previewCardProgressAtom);
   return Object.values(progress).reduce((sum, amount) => sum + amount, 0);
 });
-export const previewLabsProgressAtom = atom(DEFAULT_LABS_PROGRESS);
+export const previewLabProgressAtom = atom(DEFAULT_LAB_PROGRESS);

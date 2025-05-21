@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
 
 import { useSetAtom } from 'jotai';
 
@@ -9,10 +9,12 @@ import { usePreviewMode } from '../hooks/usePreviewMode';
 import { labModalAtom, labModalDataAtom } from '../atoms/modalsAtom';
 import { Lab } from '../types/labs';
 import { selectedLabAtom } from '../atoms/utilitiesAtom';
+import { Spacing } from '../styles/spacing';
+import { Typography } from '../styles/fonts';
 
 const LabModule = (item: Lab) => {
   const { id, name } = item;
-  const { progress, maxLevel, increment, decrement, isMaxed } = useLabData(id);
+  const { progress, maxLevel, isMaxed, isSelected } = useLabData(id);
   const setSelectedLab = useSetAtom(selectedLabAtom);
   const isPreview = usePreviewMode();
 
@@ -20,6 +22,8 @@ const LabModule = (item: Lab) => {
   const setLabModalData = useSetAtom(labModalDataAtom);
 
   const handleContainerPress = () => {
+    if (isPreview) return;
+
     setSelectedLab(id);
   };
 
@@ -29,24 +33,12 @@ const LabModule = (item: Lab) => {
   };
 
   return (
-    <Pressable style={[styles.container, isMaxed && styles.containerMaxed]} onPress={handleContainerPress} onLongPress={handleContainerLongPress}>
-      <Text style={styles.text}>{`${name} lv. ${isMaxed ? "Max" : progress}`}</Text>
-      <View style={styles.progressContainer}>
-        {!isPreview && <TouchableOpacity
-          style={[styles.button, progress === 0 && styles.buttonDisabled]}
-          onPress={decrement}
-          disabled={progress === 0}
-        >
-          <Text style={styles.buttonText}>-</Text>
-        </TouchableOpacity>}
-        <Text style={styles.progressText}>{progress}/{maxLevel}</Text>
-        {!isPreview && <TouchableOpacity
-          style={[styles.button, isMaxed && styles.buttonDisabled]}
-          onPress={increment}
-          disabled={isMaxed}
-        >
-          <Text style={styles.buttonText}>+</Text>
-        </TouchableOpacity>}
+    <Pressable style={[styles.container, isMaxed && styles.containerMaxed, isSelected && styles.containerSelected]} onPress={handleContainerPress} onLongPress={handleContainerLongPress}>
+      <View style={styles.header}>
+        <Text style={[Typography.moduleHeader, isSelected && Typography.textSelected]}>{`${name} lv. ${isMaxed ? "Max" : progress}`}</Text>
+      </View>
+      <View style={styles.body}>
+        <Text style={Typography.display}>{progress}/{maxLevel}</Text>
       </View>
     </Pressable>
   );
@@ -55,44 +47,28 @@ const LabModule = (item: Lab) => {
 export default LabModule;
 
 const styles = StyleSheet.create({
-  button: {
+  body: {
     alignItems: 'center',
-    backgroundColor: Colors.buttonBackground,
-    borderRadius: 4,
-    minWidth: 36,
-    padding: 8,
-  },
-  buttonDisabled: {
-    opacity: 0.5,
-  },
-  buttonText: {
-    color: Colors.text,
-    fontSize: 16,
+    flexDirection: 'row',
+    paddingVertical: Spacing.md,
   },
   container: {
     backgroundColor: Colors.moduleBackground,
     borderColor: Colors.moduleBorder,
     borderWidth: 2,
     flex: 1,
-    margin: 4,
-    padding: 12,
+    margin: Spacing.sm,
+    padding: Spacing.md,
   },
   containerMaxed: {
     backgroundColor: Colors.moduleBackgroundMaxed,
     borderColor: Colors.moduleBorderMaxed,
   },
-  progressContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  containerSelected: {
+    backgroundColor: Colors.moduleBackgroundSelected,
+    borderColor: Colors.moduleBorderSelected,
   },
-  progressText: {
-    color: Colors.text,
-    fontSize: 14,
-  },
-  text: {
-    color: Colors.text,
-    fontSize: 16,
-    marginBottom: 8,
+  header: {
+    flex: 1,
   },
 });
