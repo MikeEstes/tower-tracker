@@ -24,7 +24,9 @@ const CardsScreen = () => {
       <FlatList
         data={CardData}
         renderItem={({ item }) => (
-          <CardModule {...item} />
+          <View style={styles.listItem}>
+            <CardModule {...item} />
+          </View>
         )}
         keyExtractor={(item) => item.id}
         numColumns={4}
@@ -45,6 +47,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 8,
+  },
+  listItem: {
+    flex: .25,
   },
   row: {
     flex: 1,

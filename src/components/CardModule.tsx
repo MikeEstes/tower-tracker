@@ -80,7 +80,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.moduleBackground,
     borderRadius: 8,
     borderWidth: 2,
-    flex: 1,
     height: 120,
   },
   footer: {

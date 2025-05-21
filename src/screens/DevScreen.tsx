@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAtom } from 'jotai';
 
 import { Colors } from '../types/colors';
@@ -12,21 +11,19 @@ const DevScreen = () => {
   const [previewMode, setPreviewMode] = useAtom(previewModeAtom);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        <Text style={styles.title}>Developer Menu</Text>
-        <TouchableOpacity style={styles.buttonContainer} onPress={() => setPreviewMode(!previewMode)}>
-          <Text style={styles.buttonText}>{`Toggle Preview Mode: ${previewMode}`}</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView >
+    <View style={styles.container}>
+      <Text style={styles.title}>Developer Menu</Text>
+      <TouchableOpacity style={styles.buttonContainer} onPress={() => setPreviewMode(!previewMode)}>
+        <Text style={styles.buttonText}>{`Toggle Preview Mode: ${previewMode}`}</Text>
+      </TouchableOpacity>
+    </View >
   );
 };
 
 export default withBaseScreen(DevScreen, {
   getTitle: () => 'Dev Menu',
   getBannerColor: () => Colors.devBanner,
-  showAmountSelector: false,
+  moduleType: 'hidden'
 });
 
 const styles = StyleSheet.create({
@@ -49,9 +46,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.background,
     flex: 1,
-  },
-  content: {
-    padding: 16,
+    padding: 8,
   },
   title: {
     color: Colors.text,

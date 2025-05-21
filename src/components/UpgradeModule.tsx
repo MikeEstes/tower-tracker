@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.moduleBorder,
     borderWidth: 2,
     flexDirection: 'row',
-    flex: 1,
     height: 80,
     padding: 4,
   },

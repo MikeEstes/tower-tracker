@@ -37,7 +37,11 @@ const UpgradeScreen = ({ route }: UpgradeScreenProps) => {
       <FlatList
         style={styles.listContainer}
         data={upgradeData}
-        renderItem={({ item }) => <UpgradeModule {...item} />}
+        renderItem={({ item }) => (
+          <View style={styles.listItem}>
+            <UpgradeModule {...item} />
+          </View>
+        )}
         columnWrapperStyle={styles.row}
         keyExtractor={(item) => item.name}
         numColumns={2}
@@ -64,6 +68,9 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     flex: 1,
+  },
+  listItem: {
+    flex: .5,
   },
   row: {
     flex: 1,

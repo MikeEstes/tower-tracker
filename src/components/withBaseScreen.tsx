@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 
 import ModuleHeader from './ModuleHeader';
 import { Colors } from '../types/colors';
@@ -22,7 +22,7 @@ function withBaseScreen<P extends object>(
   const ComponentWithBaseScreen: React.FC<P> = (props) => {
     const title = options.getTitle(props);
     const bannerColor = options.getBannerColor(props);
-    const setModuleType = useSetAtom(currentModuleTypeAtom);
+    const [moduleType, setModuleType] = useAtom(currentModuleTypeAtom);
 
     useEffect(() => {
       setModuleType(options.moduleType);
@@ -38,10 +38,12 @@ function withBaseScreen<P extends object>(
           />
         </SafeAreaView>
 
-        {/* Bottom safe area: content fills rest of screen */}
-        <SafeAreaView edges={['bottom']} style={styles.container}>
+        <View style={styles.container}>
           <WrappedComponent {...props} />
-          <ModuleFooter />
+        </View>
+        {/* Bottom safe area: content fills rest of screen */}
+        <SafeAreaView edges={['bottom']} style={styles.footer}>
+          {moduleType !== 'hidden' && <ModuleFooter />}
         </SafeAreaView>
       </>
     );
@@ -56,5 +58,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.background,
     flex: 1,
+  },
+  footer: {
+    backgroundColor: Colors.footerColor,
   },
 });
