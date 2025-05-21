@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 
 import ModuleHeader from './ModuleHeader';
 import { Colors } from '../types/colors';
@@ -13,6 +13,7 @@ type BaseScreenOptions<P> = {
   getTitle: (props: P) => string;
   getBannerColor: (props: P) => string;
   moduleType: ModuleType;
+  showInfoButton?: boolean;
 };
 
 function withBaseScreen<P extends object>(
@@ -35,6 +36,7 @@ function withBaseScreen<P extends object>(
           <ModuleHeader
             title={title}
             bannerColor={bannerColor}
+            showInfoButton={options.showInfoButton}
           />
         </SafeAreaView>
 

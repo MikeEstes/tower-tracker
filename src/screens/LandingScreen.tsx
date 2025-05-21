@@ -4,10 +4,12 @@ import { FlatList, Pressable, StyleSheet, Text, useWindowDimensions, View } from
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
 
 import type { RootStackParamList } from '../../App';
 import { Colors } from '../types/colors';
 import { Spacing } from '../styles/spacing';
+import { Typography } from '../styles/fonts';
 
 // Define navigation prop type for this screen
 type LandingScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Landing'>;
@@ -41,6 +43,15 @@ export default function LandingScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.logoText}>{'Tower Tracker'}</Text>
+        <Pressable
+          style={styles.settingsButton}
+          onPress={() => navigation.navigate('Settings')}
+        >
+          <Ionicons name="settings-outline" size={24} color={Colors.text} />
+        </Pressable>
+      </View>
       {/* Render a grid of module cards */}
       <FlatList
         data={modules}
@@ -142,7 +153,30 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
   },
+  header: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    position: 'relative',
+  },
   listContainer: {
     alignItems: 'center',
+  },
+  logoText: {
+    color: Colors.text,
+    fontSize: 72,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  settingsButton: {
+    backgroundColor: Colors.moduleBackground,
+    borderColor: Colors.moduleBorder,
+    borderRadius: 8,
+    borderWidth: 2,
+    padding: Spacing.sm,
+    position: 'absolute',
+    right: 0,
+    top: '50%',
+    transform: [{ translateY: -12 }],
   },
 }); 

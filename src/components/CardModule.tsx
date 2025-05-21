@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: 'center',
-    //height: '20%',
+    height: '35%',
     justifyContent: 'center',
     padding: Spacing.sm,
   },

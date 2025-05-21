@@ -107,9 +107,10 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.moduleBackground,
     borderRadius: 4,
     color: Colors.text,
-    marginVertical: 8,
+    marginVertical: Spacing.md,
+    maxHeight: '40%',
     minHeight: 100,
-    padding: 8,
+    padding: Spacing.md,
     textAlignVertical: 'top',
   },
   container: {

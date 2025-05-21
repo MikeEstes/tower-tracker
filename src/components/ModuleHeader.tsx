@@ -3,24 +3,37 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSetAtom } from 'jotai';
 
 import { Colors } from '../types/colors';
 import { Spacing } from '../styles/spacing';
+import { infoModalAtom, infoModalDataAtom } from '../atoms/modalsAtom';
 
 type ModuleHeaderProps = {
   title: string;
   bannerColor: string;
+  showInfoButton?: boolean;
 }
 
-const ModuleHeader = ({ title, bannerColor }: ModuleHeaderProps) => {
+const ModuleHeader = ({ title, bannerColor, showInfoButton = false }: ModuleHeaderProps) => {
   const navigation = useNavigation();
+  const setInfoModalAtom = useSetAtom(infoModalAtom);
+  const setInfoModalData = useSetAtom(infoModalDataAtom);
 
   const handleBackPress = () => {
     navigation.goBack();
   };
 
   const handleInfoPress = () => {
-    console.log('Info pressed');
+    setInfoModalAtom(true);
+    setInfoModalData({
+      title: `${title} Statistics`,
+      stats: [
+        { label: 'Total Items', value: '0' },
+        { label: 'Items Collected', value: '0' },
+        { label: 'Completion Rate', value: '0%' },
+      ],
+    });
   };
 
   return (
@@ -30,9 +43,13 @@ const ModuleHeader = ({ title, bannerColor }: ModuleHeaderProps) => {
           <Ionicons name='arrow-back' size={24} color={Colors.text} />
         </TouchableOpacity>
         <Text style={styles.headerText}>{title.toUpperCase()}</Text>
-        <TouchableOpacity onPress={handleInfoPress} style={styles.infoButton}>
-          <Ionicons name='information-circle' size={24} color={Colors.text} />
-        </TouchableOpacity>
+        {showInfoButton ? (
+          <TouchableOpacity onPress={handleInfoPress} style={styles.infoButton}>
+            <Ionicons name='information-circle' size={24} color={Colors.text} />
+          </TouchableOpacity>
+        ) : (
+          <View style={styles.infoPlaceholder} />
+        )}
       </View>
     </View>
   );
@@ -71,5 +88,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 2,
     padding: Spacing.sm,
+  },
+  infoPlaceholder: {
+    height: 24,
+    width: 24,
   },
 });

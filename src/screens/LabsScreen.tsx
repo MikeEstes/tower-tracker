@@ -78,7 +78,8 @@ const LabsScreen = () => {
 export default withBaseScreen(LabsScreen, {
   getTitle: () => 'Labs',
   getBannerColor: () => Colors.labsBanner,
-  moduleType: 'lab'
+  moduleType: 'lab',
+  showInfoButton: true,
 });
 
 const styles = StyleSheet.create({

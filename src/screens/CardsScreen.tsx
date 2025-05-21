@@ -41,7 +41,8 @@ const CardsScreen = () => {
 export default withBaseScreen(CardsScreen, {
   getTitle: () => 'Cards',
   getBannerColor: () => Colors.cardsBanner,
-  moduleType: 'card'
+  moduleType: 'card',
+  showInfoButton: true,
 });
 
 const styles = StyleSheet.create({

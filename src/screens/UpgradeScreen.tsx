@@ -55,7 +55,8 @@ const UpgradeScreen = ({ route }: UpgradeScreenProps) => {
 export default withBaseScreen<UpgradeScreenProps>(UpgradeScreen, {
   getTitle: ({ route }) => `${route.params.type} UPGRADES`,
   getBannerColor: ({ route }) => bannerColorMap[route.params.type],
-  moduleType: 'upgrade'
+  moduleType: 'upgrade',
+  showInfoButton: true,
 });
 
 const styles = StyleSheet.create({

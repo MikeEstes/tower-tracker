@@ -15,7 +15,9 @@ import ShareScreen from './src/screens/ShareScreen';
 import RelicsScreen from './src/screens/RelicsScreen';
 import ModulesScreen from './src/screens/ModulesScreen';
 import DevScreen from './src/screens/DevScreen';
+import SettingsScreen from './src/screens/SettingsScreen';
 import StorageSync from './src/components/StorageSync';
+import InfoModal from './src/components/InfoModal';
 
 // Define the navigation param list for type safety
 export type RootStackParamList = {
@@ -30,14 +32,14 @@ export type RootStackParamList = {
   Relics: undefined;
   Modules: undefined;
   Dev: undefined;
+  Settings: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-export default function App() {
+const App = () => {
   return (
     <Provider>
-      <StorageSync />
       <SafeAreaProvider>
         <NavigationContainer>
           <Stack.Navigator initialRouteName="Landing" screenOptions={{ headerShown: false }}>
@@ -52,10 +54,15 @@ export default function App() {
             <Stack.Screen name="Relics" component={RelicsScreen} options={{ title: 'Relics' }} />
             <Stack.Screen name="Modules" component={ModulesScreen} options={{ title: 'Modules' }} />
             <Stack.Screen name="Dev" component={DevScreen} options={{ title: 'Dev Menu' }} />
+            <Stack.Screen name="Settings" component={SettingsScreen} options={{ title: 'Settings' }} />
           </Stack.Navigator>
+          <StorageSync />
+          <InfoModal />
         </NavigationContainer>
         <StatusBar hidden={true} />
       </SafeAreaProvider>
     </Provider>
   );
-}
+};
+
+export default App;
