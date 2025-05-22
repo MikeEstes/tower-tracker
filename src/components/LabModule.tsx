@@ -27,8 +27,10 @@ const LabModule = (item: Lab) => {
   };
 
   const handleContainerLongPress = () => {
-    setLabModalData(id);
-    setIsVisible(true);
+    if (__DEV__) {
+      setLabModalData(id);
+      setIsVisible(true);
+    }
   };
 
   return (

@@ -9,7 +9,6 @@ import { Ionicons } from '@expo/vector-icons';
 import type { RootStackParamList } from '../../App';
 import { Colors } from '../styles/colors';
 import { Spacing } from '../styles/spacing';
-import { Typography } from '../styles/fonts';
 
 // Define navigation prop type for this screen
 type LandingScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Landing'>;
