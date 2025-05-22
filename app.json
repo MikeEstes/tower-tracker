@@ -13,8 +13,11 @@
       "backgroundColor": "#212053"
     },
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.imisshtml.towertracker"
+      "supportsTablet": false,
+      "bundleIdentifier": "com.imisshtml.towertracker",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {

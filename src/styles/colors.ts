@@ -5,6 +5,7 @@ export const Colors = {
   buttonBackground: '#00000060',
   buttonBackgroundSelected: '#00FFFF90',
   cardsBanner: '#1A9FC9',
+  checkbox: '#60D64C',
   common: '#FFFFFF',
   defenseBanner: '#CF3F59',
   epic: '#FA25E6',

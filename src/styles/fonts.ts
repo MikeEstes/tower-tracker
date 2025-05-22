@@ -19,6 +19,12 @@ export const Typography = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  labsHeader: {
+    color: Colors.text,
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
   modalHeader: {
     color: Colors.text,
     fontSize: 24,
