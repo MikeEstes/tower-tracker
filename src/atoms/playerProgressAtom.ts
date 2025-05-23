@@ -31,6 +31,7 @@ export const DEFAULT_CARD_PROGRESS: CardProgress = {
   energyShield: 0,
   waveAccelerator: 0,
   berserker: 0,
+  ultimateCrit: 0,
   nuke: 0,
 };
 

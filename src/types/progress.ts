@@ -28,6 +28,7 @@ export interface CardProgress {
   energyShield: number;
   waveAccelerator: number;
   berserker: number;
+  ultimateCrit: number;
   nuke: number;
 }
 

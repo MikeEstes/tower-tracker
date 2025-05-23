@@ -1,4 +1,5 @@
 import React from 'react';
+import 'react-native-get-random-values';
 
 import { Provider } from 'jotai';
 import { StatusBar } from 'expo-status-bar';
@@ -6,6 +7,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Toast from 'react-native-toast-message';
+import * as Linking from 'expo-linking';
 
 import LandingScreen from './src/screens/LandingScreen';
 import UpgradeScreen from './src/screens/UpgradeScreen';
@@ -30,7 +32,7 @@ export type RootStackParamList = {
   UltimateWeapons: undefined;
   Cards: undefined;
   Labs: undefined;
-  Share: undefined;
+  Share: { code?: string };
   Relics: undefined;
   Modules: undefined;
   Dev: undefined;
@@ -39,11 +41,33 @@ export type RootStackParamList = {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+// Configure deep linking for the app
+const prefix = Linking.createURL('/');
+const linking = {
+  prefixes: [prefix, 'towertracker://'],
+  config: {
+    screens: {
+      Landing: '',
+      AttackUpgrade: 'attack/:type',
+      DefenseUpgrade: 'defense/:type',
+      UtilityUpgrade: 'utility/:type',
+      UltimateWeapons: 'ultimate',
+      Cards: 'cards',
+      Labs: 'labs',
+      Share: 'share/:code',
+      Relics: 'relics',
+      Modules: 'modules',
+      Dev: 'dev',
+      Settings: 'settings',
+    },
+  },
+};
+
 const App = () => {
   return (
     <Provider>
       <SafeAreaProvider>
-        <NavigationContainer>
+        <NavigationContainer linking={linking}>
           <Stack.Navigator initialRouteName="Landing" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Landing" component={LandingScreen} options={{ title: 'Tower Tracker' }} />
             <Stack.Screen name="AttackUpgrade" component={UpgradeScreen} options={{ title: 'Attack Upgrade' }} />

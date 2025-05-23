@@ -17,3 +17,6 @@ ios/**/*.json
 
 node_modules/**
 scripts/**
+
+# Expo config file
+app.config.js

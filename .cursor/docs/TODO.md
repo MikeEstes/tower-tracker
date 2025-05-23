@@ -1,11 +1,14 @@
 ## Features
-- [ ] Implement QR scanning for import
+- [x] Implement QR scanning for import
 - [x] Add absolutely placed "Preview Mode" eject button to App Stack
 - [ ] Add Card Slots and Remaining Gems counter to CardsScreen
-- [ ] Add Number of Labs to Labs Screen
+- [x] Add Number of Labs to Labs Screen
 - [x] Add Info button to screens to show additional stats, like cards collected or lab progress
 - [ ] Add "Tag" for labs to track things you want to research later
 - [x] Add "Hide Completed" checkbox to Labs list
 - [ ] Add descriptions to Labs
-- [ ] Style Labs headers to match the game
+- [x] Style Labs headers to match the game
 - [ ] Add "Next" increment to Cards screen
+- [ ] Add Enhanced Stats to Attack, Defense, and Utility.
+- [ ] Investigate NaN error on card info screen.
+- [ ] Update colors for selected module to make it more clear.

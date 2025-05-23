@@ -36,7 +36,7 @@ const LabModule = (item: Lab) => {
   return (
     <Pressable style={[styles.container, isMaxed && styles.containerMaxed, isSelected && styles.containerSelected]} onPress={handleContainerPress} onLongPress={handleContainerLongPress}>
       <View style={styles.header}>
-        <Text style={[Typography.moduleHeader, isSelected && Typography.textSelected]}>{`${name} lv. ${isMaxed ? "Max" : progress}`}</Text>
+        <Text numberOfLines={2} style={[Typography.moduleHeader, isSelected && Typography.textSelected]}>{`${name} lv. ${isMaxed ? "Max" : progress}`}</Text>
       </View>
       <View style={styles.body}>
         <Text style={Typography.display}>{progress}/{maxLevel}</Text>
@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.moduleBorder,
     borderWidth: 2,
     flex: 1,
+    height: 100,
     margin: Spacing.sm,
     padding: Spacing.md,
   },
@@ -70,6 +71,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.moduleBorderSelected,
   },
   header: {
-    flex: 1,
+    height: 40,
   },
 });
